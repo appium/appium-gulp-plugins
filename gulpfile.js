@@ -1,7 +1,7 @@
 var gulp = require('gulp'),
     Q = require('q'),
     del = Q.denodeify(require('del')),
-    transpile = require('./index').gulpTranspile,
+    Transpiler = require('./index').Transpiler,
     mocha = require('gulp-mocha'),
     spawnWatcher = require('./index').spawnWatcher.use(gulp),
     runSequence = Q.denodeify(require('run-sequence').use(gulp));
@@ -11,8 +11,9 @@ gulp.task('del-build', function (cb) {
 });
 
 gulp.task('transpile-es7-fixtures', ['del-build'] , function () {
+  var transpiler = new Transpiler();
   return gulp.src('test/fixtures/es7/**/*.js')
-    .pipe(transpile())
+    .pipe(transpiler.stream())
     .on('error', spawnWatcher.handleError)
     .pipe(gulp.dest('build'));
 });
@@ -39,6 +40,6 @@ gulp.task('test', function() {
 
 spawnWatcher.clear(false);
 spawnWatcher.configure('watch', ['lib/**/*.js','test/**/*.js','!test/fixtures'], function() {
-  return runSequence('test-es7-mocha-throw', 'test');
+  return runSequence('test');
 });
 

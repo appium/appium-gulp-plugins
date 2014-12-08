@@ -14,11 +14,14 @@ renamed to `.js files`. The necessary sourcemaps and traceur comments and import
 
 ``` js
 var gulp = require('gulp'),
-transpile = require('appium-gulp-plugins').gulpTranspile
+Transpiler = require('appium-gulp-plugins').Transpiler;
 
 gulp.task('transpile', function () {
+  var transpiler = new Transpiler();
+  // traceur options are configurable in transpiler.traceurOpts
+
   return gulp.src('test/fixtures/es7/**/*.js')
-    .pipe(transpile())
+    .pipe(transpiler.stream())
     .pipe(gulp.dest('build'));
 });
 ```

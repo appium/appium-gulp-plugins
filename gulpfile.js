@@ -27,16 +27,18 @@ gulp.task('test-es7-mocha', ['transpile-es7-fixtures'] , function () {
 gulp.task('test-es7-mocha-throw', ['transpile-es7-fixtures'] , function () {
   process.env.SKIP_TRACEUR_RUNTIME = true;
   return gulp.src('build/test/a-throw-specs.js')
-    .pipe(mocha());
+    .pipe(mocha())
+    .on('error', spawnWatcher.handleError);
 });
 
 gulp.task('test', function() {
   return gulp.src(['test/**/*-specs.js', '!test/fixtures'])
-    .pipe(mocha());
+    .pipe(mocha())
+    .on('error', spawnWatcher.handleError);
 });
 
-//spawnWatcher.clear(false);
+spawnWatcher.clear(false);
 spawnWatcher.configure('watch', ['lib/**/*.js','test/**/*.js','!test/fixtures'], function() {
-  return runSequence('test');
+  return runSequence('test-es7-mocha-throw', 'test');
 });
 

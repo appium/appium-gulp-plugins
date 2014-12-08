@@ -20,11 +20,13 @@
     "mocha": "^2.0.1",
     "mochawait": "^1.1.0",
     "q": "^1.1.2",
+    "run-sequence": "^1.0.2",
     "source-map-support": "^0.2.8",
     "traceur": "0.0.79",
     "vargs": "^0.1.0"
   },
   "dependencies": {
+    "clear": "0.0.1",
     "gulp-insert": "^0.4.0",
     "gulp-rename": "^1.2.0",
     "gulp-replace": "^0.5.0",

@@ -3,7 +3,7 @@ var gulp = require('gulp'),
     del = Q.denodeify(require('del')),
     transpile = require('./index').gulpTranspile,
     mocha = require('gulp-mocha'),
-    spawnWatcher = require('./index').spawnWatcher.use(gulp).clear(true),
+    spawnWatcher = require('./index').spawnWatcher.use(gulp),
     runSequence = Q.denodeify(require('run-sequence').use(gulp));
 
 gulp.task('del-build', function (cb) {
@@ -35,7 +35,8 @@ gulp.task('test', function() {
     .pipe(mocha());
 });
 
-spawnWatcher.watch('watch', ['lib/**/*.js','test/**/*.js','!test/fixtures'], function() {
+//spawnWatcher.clear(false);
+spawnWatcher.configure('watch', ['lib/**/*.js','test/**/*.js','!test/fixtures'], function() {
   return runSequence('test');
 });
 

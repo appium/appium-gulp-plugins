@@ -3,8 +3,6 @@ appium-gulp-plugins
 
 Custom plugins used accross appium modules
 
-TODO: waiting for feedback before publishing on npm
-
 ## transpile plugin
 
 Traceur compilation, sourcemaps and file renaming functionality in one plugin. `.es7.js` and `.es6.js` files will be automatically

@@ -43,3 +43,5 @@ spawnWatcher.configure('watch', ['lib/**/*.js','test/**/*.js','!test/fixtures'],
   return runSequence('test');
 });
 
+gulp.task('default', ['watch']);
+

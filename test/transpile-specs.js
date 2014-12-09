@@ -95,7 +95,7 @@ describe('transpile-specs', function () {
     });
 
     it('should use sourcemap when throwing within gulp-mocha', function () {
-      return exec('./node_modules/.bin/gulp test-es7-mocha-throw')
+      return exec('./node_modules/.bin/gulp --no-notif test-es7-mocha-throw')
         .spread(function (stdout, stderr) {
           print(stdout, stderr);
           var output = stdout + stderr;

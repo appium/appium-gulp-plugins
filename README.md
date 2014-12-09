@@ -60,9 +60,11 @@ spawnWatcher.configure('watch', ['lib/**/*.js','test/**/*.js','!test/fixtures'],
 });
 ```
 
+The test function in `spawnWatcher.configure` should return a promise.
+
 ### error handling
 
-The spawn needs to catch error as soon as they happen. To do so use the 
+The spawn needs to catch error as soon as they happen. To do so use the
 `spawnWatcher.handleError` method, for instance:
 
 ```js

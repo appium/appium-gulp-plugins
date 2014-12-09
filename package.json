@@ -1,6 +1,6 @@
 {
   "name": "appium-gulp-plugins",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Custom gulp plugins to be used accross all appium modules",
   "main": "index.js",
   "scripts": {

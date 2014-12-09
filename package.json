@@ -28,6 +28,7 @@
     "gulp-traceur": "~0.14.1",
     "gulp-util": "^3.0.1",
     "lodash": "^2.4.1",
+    "moment": "^2.8.4",
     "node-notifier": "^4.0.3",
     "q": "~1.1.2",
     "source-map-support": "~0.2.8",

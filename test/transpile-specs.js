@@ -70,6 +70,7 @@ describe('transpile-specs', function () {
           var output = stdout + stderr;
           output.should.include('This is really bad!');
           output.should.include('.es7.js');
+          output.should.include('throw.es7.js:7');
        })
     });
 
@@ -80,6 +81,7 @@ describe('transpile-specs', function () {
           var output = stdout + stderr;
           output.should.include('This is really bad!');
           output.should.include('.es7.js');
+          output.should.include('a-throw-specs.es7.js:13');
        })
     });
 

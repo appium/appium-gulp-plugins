@@ -92,3 +92,7 @@ Terminal is cleared by default. To avoid that call:
 spawnWatcher.clear(false);
 ```
 
+### notification
+
+Native notification is enabled by default. To disable it use the
+`--no-notif` option.

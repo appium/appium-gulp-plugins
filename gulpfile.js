@@ -65,7 +65,7 @@ gulp.task('once', function () {
 });
 
 spawnWatcher.clear(false);
-spawnWatcher.configure('watch', ['lib/**/*.js','test/**/*.js','!test/fixtures'], function () {
+spawnWatcher.configure('watch', ['index.js', 'lib/**/*.js','test/**/*.js','!test/fixtures'], function () {
   return runSequence('lint', 'test');
 });
 

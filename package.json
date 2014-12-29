@@ -1,39 +1,50 @@
 {
   "name": "appium-gulp-plugins",
-  "version": "0.0.7",
   "description": "Custom gulp plugins to be used accross all appium modules",
-  "main": "index.js",
-  "scripts": {
-    "test": "gulp test"
-  },
   "keywords": [
     "appium"
   ],
-  "author": "appium contributors",
-  "license": "Apache2",
-  "devDependencies": {
-    "appium-transpile-runtime": "0.0.2",
-    "chai": "~1.10.0",
-    "del": "~1.1.0",
-    "gulp": "~3.8.10",
-    "gulp-mocha": "~2.0.0",
-    "mocha": "~2.0.1",
-    "mochawait": "~1.1.0",
-    "run-sequence": "~1.0.2",
-    "vargs": "~0.1.0"
+  "version": "0.0.7",
+  "author": "appium",
+  "license": "Apache License 2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/appium/appium-gulp-plugins.git"
+  },
+  "bugs": {
+    "url": "https://github.com/appium/appium-gulp-plugins/issues"
+  },
+  "engines": [
+    "node"
+  ],
+  "main": "./index.js",
+  "bin": {},
+  "directories": {
+    "lib": "lib"
   },
   "dependencies": {
     "clear": "~0.0.1",
     "gulp-rename": "~1.2.0",
     "gulp-replace": "~0.5.0",
-    "gulp-traceur": "~0.14.1",
+    "gulp-traceur": "~0.15",
     "gulp-util": "^3.0.1",
     "lodash": "^2.4.1",
     "moment": "^2.8.4",
     "node-notifier": "^4.0.3",
     "q": "~1.1.2"
   },
-  "directories": {
-    "test": "test"
+  "scripts": {
+    "test": "./node_modules/.bin/gulp test"
+  },
+  "devDependencies": {
+    "appium-transpile-runtime": "0.0.2",
+    "chai": "^1.10.0",
+    "del": "^1.1.0",
+    "gulp": "^3.8.10",
+    "gulp-mocha": "^2.0.0",
+    "mocha": "^2.0.1",
+    "mochawait": "^1.1.0",
+    "run-sequence": "^1.0.2",
+    "vargs": "^0.1.0"
   }
 }

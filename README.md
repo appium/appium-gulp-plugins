@@ -96,3 +96,17 @@ spawnWatcher.clear(false);
 
 Native notification is enabled by default. To disable it use the
 `--no-notif` option.
+
+## hacking this package
+
+### watch
+
+```
+npm run watch
+```
+
+### test
+
+```
+npm test
+```

@@ -1,3 +1,5 @@
+"use strict";
+
 var Q = require('q'),
     Args = require("vargs").Constructor,
     _exec = require('child_process').exec,
@@ -33,15 +35,15 @@ describe('transpile-specs', function () {
         stderr.should.equal('');
         stdout.should.include('Finished');
      }).then(function () {
-       return openFile('build/lib/a.js', 'r')
+       return openFile('build/lib/a.js', 'r');
      }).then(function (fd) {
       return closeFile(fd);
     });
   });
 
-  describe('check transpiled code', function() {
+  describe('check transpiled code', function () {
 
-   before(function() {
+   before(function () {
       return exec('./node_modules/.bin/gulp transpile-es7-fixtures');
     });
 
@@ -51,7 +53,7 @@ describe('transpile-specs', function () {
           print(stdout, stderr);
           stderr.should.equal('');
           stdout.should.include('hello world!');
-       })
+       });
     });
 
     it('should be able to run transpiled tests', function () {
@@ -60,7 +62,7 @@ describe('transpile-specs', function () {
           print(stdout, stderr);
           stderr.should.equal('');
           stdout.should.include('1 passing');
-      })
+      });
     });
 
     it('should use sourcemap when throwing', function () {
@@ -71,7 +73,7 @@ describe('transpile-specs', function () {
           output.should.include('This is really bad!');
           output.should.include('.es7.js');
           output.should.include('throw.es7.js:7');
-       })
+       });
     });
 
     it('should use sourcemap when throwing within mocha', function () {
@@ -82,7 +84,7 @@ describe('transpile-specs', function () {
           output.should.include('This is really bad!');
           output.should.include('.es7.js');
           output.should.include('a-throw-specs.es7.js:13');
-       })
+       });
     });
 
     it('should be able to use gulp-mocha', function () {
@@ -91,7 +93,7 @@ describe('transpile-specs', function () {
           print(stdout, stderr);
           stderr.should.equal('');
           stdout.should.include('Finished');
-       })
+       });
     });
 
     it('should use sourcemap when throwing within gulp-mocha', function () {
@@ -101,8 +103,8 @@ describe('transpile-specs', function () {
           var output = stdout + stderr;
           output.should.include('This is really bad!');
           output.should.include('.es7.js');
-       })
+       });
     });
 
-  })
+  });
 });

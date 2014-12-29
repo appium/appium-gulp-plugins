@@ -1,12 +1,34 @@
+"use strict";
+
 var gulp = require('gulp'),
     Q = require('q'),
     del = Q.denodeify(require('del')),
+    jshint = require('gulp-jshint'),
+    jscs = require('gulp-jscs'),
     Transpiler = require('./index').Transpiler,
     mocha = require('gulp-mocha'),
     spawnWatcher = require('./index').spawnWatcher.use(gulp),
     runSequence = Q.denodeify(require('run-sequence').use(gulp));
 
-gulp.task('del-build', function (cb) {
+gulp.task('jscs', function () {
+  return gulp
+   .src(['*.js', 'lib/**/*.js', 'test/*.js'])
+   .pipe(jscs())
+   .on('error', spawnWatcher.handleError);
+});
+
+gulp.task('jshint', function () {
+  return gulp
+   .src(['*.js', 'lib/**/*.js', 'test/**/*.js'])
+   .pipe(jshint())
+   .pipe(jshint.reporter('jshint-stylish'))
+   .pipe(jshint.reporter('fail'))
+   .on('error', spawnWatcher.handleError);
+});
+
+gulp.task('lint',['jshint','jscs']);
+
+gulp.task('del-build', function () {
   return del(['build']);
 });
 
@@ -32,19 +54,19 @@ gulp.task('test-es7-mocha-throw', ['transpile-es7-fixtures'] , function () {
     .on('error', spawnWatcher.handleError);
 });
 
-gulp.task('test', function() {
+gulp.task('test', function () {
   return gulp.src(['test/**/*-specs.js', '!test/fixtures'])
     .pipe(mocha())
     .on('error', spawnWatcher.handleError);
 });
 
 gulp.task('once', function () {
-  return runSequence('test');
+  return runSequence('lint', 'test');
 });
 
 spawnWatcher.clear(false);
-spawnWatcher.configure('watch', ['lib/**/*.js','test/**/*.js','!test/fixtures'], function() {
-  return runSequence('test');
+spawnWatcher.configure('watch', ['lib/**/*.js','test/**/*.js','!test/fixtures'], function () {
+  return runSequence('lint', 'test');
 });
 
 gulp.task('default', ['watch']);

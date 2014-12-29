@@ -34,7 +34,8 @@
     "q": "~1.1.2"
   },
   "scripts": {
-    "test": "./node_modules/.bin/gulp test"
+    "test": "./node_modules/.bin/gulp once",
+    "watch": "./node_modules/.bin/gulp"
   },
   "devDependencies": {
     "appium-transpile-runtime": "0.0.2",

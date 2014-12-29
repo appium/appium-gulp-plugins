@@ -38,6 +38,10 @@ gulp.task('test', function() {
     .on('error', spawnWatcher.handleError);
 });
 
+gulp.task('once', function () {
+  return runSequence('test');
+});
+
 spawnWatcher.clear(false);
 spawnWatcher.configure('watch', ['lib/**/*.js','test/**/*.js','!test/fixtures'], function() {
   return runSequence('test');

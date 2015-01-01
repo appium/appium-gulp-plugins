@@ -10,6 +10,8 @@ var gulp = require('gulp'),
     spawnWatcher = require('./index').spawnWatcher.use(gulp),
     runSequence = Q.denodeify(require('run-sequence').use(gulp));
 
+var argv = require('yargs').count('rttsAssert').argv;
+
 gulp.task('jscs', function () {
   return gulp
    .src(['*.js', 'lib/**/*.js', 'test/*.js'])
@@ -33,7 +35,7 @@ gulp.task('del-build', function () {
 });
 
 gulp.task('transpile-es7-fixtures', ['del-build'] , function () {
-  var transpiler = new Transpiler();
+  var transpiler = new Transpiler(argv.rttsAssert ? {'rtts-assert': true} : null);
   return gulp.src('test/fixtures/es7/**/*.js')
     .pipe(transpiler.stream())
     .on('error', spawnWatcher.handleError)

@@ -38,7 +38,7 @@
     "watch": "./node_modules/.bin/gulp"
   },
   "devDependencies": {
-    "appium-transpile-runtime": "0.0.3",
+    "appium-transpile-runtime": "0.0.4",
     "chai": "^1.10.0",
     "del": "^1.1.0",
     "gulp": "^3.8.10",
@@ -49,6 +49,7 @@
     "mocha": "^2.0.1",
     "mochawait": "^1.1.0",
     "run-sequence": "^1.0.2",
-    "vargs": "^0.1.0"
+    "vargs": "^0.1.0",
+    "yargs": "^1.3.3"
   }
 }

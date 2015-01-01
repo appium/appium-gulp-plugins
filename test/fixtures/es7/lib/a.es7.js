@@ -1,9 +1,9 @@
 class A {
-  constructor (text) {
+  constructor (text/*:string*/) {
     this.text = text;
   }
 
-  getText () {
+  getText ()/*:string*/ {
     return this.text;
   }
 

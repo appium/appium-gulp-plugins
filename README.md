@@ -41,6 +41,25 @@ Set the following env variable to skip the traceur runtime declaration.
 process.env.SKIP_TRACEUR_RUNTIME = true;
 ```
 
+### rtts-assert
+
+Type assertions may be enable by passing the following
+option to the traspiler:
+
+```js
+var transpiler = new Transpiler({'rtts-assert': true});
+```
+
+You may specify type in your code like in the following:
+
+```js
+// The regular way
+let a = function(t:string, n:number):string {return 'let's type code.'};
+
+// Within comments
+let a = function(ti/*:string*/, n/*:number*/)/*:string*/ {return 'let's type code.'};
+```
+
 ## watch plugin
 
 There are some issues Gulp 3.x error handling which cause the default

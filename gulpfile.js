@@ -10,7 +10,7 @@ var gulp = require('gulp'),
     spawnWatcher = require('./index').spawnWatcher.use(gulp),
     runSequence = Q.denodeify(require('run-sequence').use(gulp));
 
-var argv = require('yargs').count('rttsAssert').argv;
+var argv = require('yargs').count('flow').argv;
 
 gulp.task('jscs', function () {
   return gulp
@@ -35,7 +35,7 @@ gulp.task('del-build', function () {
 });
 
 gulp.task('transpile-es7-fixtures', ['del-build'] , function () {
-  var transpiler = new Transpiler(argv.rttsAssert ? {'rtts-assert': true} : null);
+  var transpiler = new Transpiler(argv.flow ? {flow: true} : null);
   return gulp.src('test/fixtures/es7/**/*.js')
     .pipe(transpiler.stream())
     .on('error', spawnWatcher.handleError)
@@ -43,14 +43,12 @@ gulp.task('transpile-es7-fixtures', ['del-build'] , function () {
 });
 
 gulp.task('test-es7-mocha', ['transpile-es7-fixtures'] , function () {
-  process.env.SKIP_TRACEUR_RUNTIME = true;
   return gulp.src('build/test/a-specs.js')
     .pipe(mocha())
     .on('error', spawnWatcher.handleError);
 });
 
 gulp.task('test-es7-mocha-throw', ['transpile-es7-fixtures'] , function () {
-  process.env.SKIP_TRACEUR_RUNTIME = true;
   return gulp.src('build/test/a-throw-specs.js')
     .pipe(mocha())
     .on('error', spawnWatcher.handleError);
@@ -72,4 +70,3 @@ spawnWatcher.configure('watch', ['index.js', 'lib/**/*.js','test/**/*.js','!test
 });
 
 gulp.task('default', ['watch']);
-

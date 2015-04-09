@@ -5,8 +5,10 @@ Custom plugins used accross appium modules
 
 ## transpile plugin
 
-Traceur compilation, sourcemaps and file renaming functionality in one plugin. `.es7.js` and `.es6.js` files will be automatically
-renamed to `.js files`. The necessary sourcemaps and traceur comments and imports are also automatically added.
+Babel compilation (via Traceur), sourcemaps and file renaming functionality in
+one plugin. `.es7.js` and `.es6.js` files will be automatically renamed to `.js
+files`. The necessary sourcemaps and traceur comments and imports are also
+automatically added.
 
 ### usage
 
@@ -18,7 +20,7 @@ Transpiler = require('appium-gulp-plugins').Transpiler;
 
 gulp.task('transpile', function () {
   var transpiler = new Transpiler();
-  // traceur options are configurable in transpiler.traceurOpts
+  // babel options are configurable in transpiler.babelOpts
 
   return gulp.src('test/fixtures/es7/**/*.js')
     .pipe(transpiler.stream())
@@ -33,24 +35,17 @@ gulp.task('transpile', function () {
 
 Regular lib files do not need any extra comments.
 
-### with gulp-mocha
+### Type assertions
 
-Set the following env variable to skip the traceur runtime declaration.
-
-```js
-process.env.SKIP_TRACEUR_RUNTIME = true;
-```
-
-### rtts-assert
-
-Type assertions may be enable by passing the following
+Type assertions are not yet supported, but if you use Flow you can pass in an
 option to the traspiler:
 
 ```js
 var transpiler = new Transpiler({'rtts-assert': true});
 ```
 
-You may specify type in your code like in the following:
+This will leave the type annotations un-stripped. You may specify type in your
+code like in the following:
 
 ```js
 // The regular way
@@ -62,10 +57,9 @@ let a = function(ti/*:string*/, n/*:number*/)/*:string*/ {return 'let's type cod
 
 ## watch plugin
 
-There are some issues Gulp 3.x error handling which cause the default
-gulp-watch to hang. This pluging is a small hack which solves that by
-respawning the whole process on error. This should not be needed is
-gulp 4.0.
+There are some issues with Gulp 3.x error handling which cause the default
+gulp-watch to hang. This plugin is a small hack which solves that by respawning
+the whole process on error. This should not be needed in gulp 4.0.
 
 ### usage
 
@@ -96,7 +90,6 @@ gulp.task('transpile', function () {
 });
 
 gulp.task('test', ['transpile'] , function () {
-  process.env.SKIP_TRACEUR_RUNTIME = true;
   return gulp.src('build/test/a-specs.js')
     .pipe(mocha())
     .on('error', spawnWatcher.handleError);

@@ -37,29 +37,13 @@ describe('transpile-specs', function () {
        return readFile('build/lib/a.js', 'utf8');
      }).then(function (content) {
       content.should.have.length.above(0);
-      content.should.not.include('rtts-assert');
-      content.should.include('sourceMapping');
-    });
-  });
-
-  it('should transpile es7 fixtures with rtts-assert enabled', function () {
-    return exec('./node_modules/.bin/gulp transpile-es7-fixtures --rttsAssert')
-      .spread(function (stdout, stderr) {
-        print(stdout, stderr);
-        stderr.should.equal('');
-        stdout.should.include('Finished');
-     }).then(function () {
-       return readFile('build/lib/a.js', 'utf8');
-     }).then(function (content) {
-      content.should.have.length.above(0);
-      content.should.include('rtts-assert');
       content.should.include('sourceMapping');
     });
   });
 
   var checkCode = function (opts) {
     opts = opts || {};
-    var gulpOpts = opts['rtts-assert'] ? ' --rttsAssert' : '';
+    var gulpOpts = opts.flow ? ' --flow' : '';
     before(function () {
       return exec('./node_modules/.bin/gulp transpile-es7-fixtures' + gulpOpts);
     });
@@ -82,27 +66,15 @@ describe('transpile-specs', function () {
       });
     });
 
-    if (opts['rtts-assert']) {
-      it('should detect a rtts-assert error', function () {
-        return exec('node build/lib/rtts-assert-error.js')
-          .spread(function (stdout, stderr) {
-            print(stdout, stderr);
-            stderr.should.equal('');
-            stdout.should.not.include('hello world!');
-            stdout.should.include('Invalid arguments given!');
-         });
-      });
-    } else {
-      it('should not detect a rtts-assert error', function () {
-        return exec('node build/lib/rtts-assert-error.js')
-          .spread(function (stdout, stderr) {
-            print(stdout, stderr);
-            stderr.should.equal('');
-            stdout.should.include('123');
-            stdout.should.not.include('Invalid arguments given!');
-         });
-      });
-    }
+    it('should not detect a rtts-assert error', function () {
+      return exec('node build/lib/rtts-assert-error.js')
+        .spread(function (stdout, stderr) {
+          print(stdout, stderr);
+          stderr.should.equal('');
+          stdout.should.include('123');
+          stdout.should.not.include('Invalid arguments given!');
+       });
+    });
 
     it('should use sourcemap when throwing', function () {
       return exec('node build/lib/throw.js')
@@ -122,7 +94,7 @@ describe('transpile-specs', function () {
           var output = stdout + stderr;
           output.should.include('This is really bad!');
           output.should.include('.es7.js');
-          output.should.include('a-throw-specs.es7.js:13');
+          output.should.include('a-throw-specs.es7.js:12');
        });
     });
 
@@ -151,8 +123,10 @@ describe('transpile-specs', function () {
     checkCode();
   });
 
-  describe('check transpiled code when rtts-assert is enabled', function () {
-   checkCode({'rtts-assert': true});
+  // skip because flow requires extra setup and we might not want to support
+  // it at all
+  describe.skip('check transpiled code when flow is enabled', function () {
+    checkCode({flow: true});
   });
 
 });

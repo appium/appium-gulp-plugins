@@ -1,3 +1,4 @@
+/* global describe:true, it:true */
 // transpile:mocha
 
 import 'mochawait';
@@ -6,10 +7,9 @@ import {A} from '../lib/a';
 
 chai.should();
 
-
 describe('a', () => {
   it('should be able to get text', () => {
-    var a = new A('hello world!');
+    let a = new A('hello world!');
     a.getText().should.equal('hello world!');
   });
 });

@@ -3,6 +3,46 @@ appium-gulp-plugins
 
 Custom plugins used accross appium modules
 
+## boilerplate plugin
+
+This plugin sets up all the other typical plugins we use with a simple
+configuration object.
+
+### usage
+
+Basically just set up the `boilerplate` plugin as follows:
+
+```js
+var gulp = require('gulp'),
+    boilerplate = require('appium-gulp-plugins').boilerplate.use(gulp);
+
+boilerplate({build: "My Project Name"});
+```
+
+You can pass a lot of options to configure `boilerplate`. Here are the options
+along with their defaults (from `lib/boilerplate.js`):
+
+```js
+var DEFAULT_OPTS = {
+  files: ["*.js", "lib/**/*.js", "test/**/*.js", "!gulpfile.js"],
+  transpile: true,
+  transpileOut: "build",
+  babelOpts: {},
+  linkBabelRuntime: true,
+  jscs: true,
+  jshint: true,
+  watch: true,
+  test: true,
+  testFiles: null,
+  testReporter: 'nyan',
+  testTimeout: 8000,
+  buildName: null
+};
+```
+
+As you can see, it defaults to transpiling with Babel, running jshint and jscs,
+running tests, and with the default task being `gulp watch`.
+
 ## transpile plugin
 
 Babel compilation (via Traceur), sourcemaps and file renaming functionality in
@@ -41,7 +81,7 @@ Type assertions are not yet supported, but if you use Flow you can pass in an
 option to the traspiler:
 
 ```js
-var transpiler = new Transpiler({'rtts-assert': true});
+var transpiler = new Transpiler({flow: true});
 ```
 
 This will leave the type annotations un-stripped. You may specify type in your

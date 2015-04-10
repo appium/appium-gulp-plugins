@@ -34,6 +34,7 @@
     "gulp-rename": "^1.2.0",
     "gulp-replace": "^0.5.0",
     "gulp-util": "^3.0.1",
+    "jshint-stylish": "^1.0.0",
     "lodash": "^3.6.0",
     "moment": "^2.8.4",
     "node-notifier": "^4.0.3",
@@ -49,7 +50,6 @@
   "devDependencies": {
     "chai": "^2.2.0",
     "gulp": "^3.8.10",
-    "jshint-stylish": "^1.0.0",
     "mocha": "^2.0.1",
     "mochawait": "^1.1.0",
     "vargs": "^0.1.0",

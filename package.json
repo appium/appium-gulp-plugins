@@ -6,7 +6,7 @@
   ],
   "version": "1.1.4",
   "author": "appium",
-  "license": "Apache License 2.0",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/appium/appium-gulp-plugins.git"
@@ -49,6 +49,7 @@
   },
   "devDependencies": {
     "chai": "^2.2.0",
+    "glob": "^5.0.10",
     "gulp": "^3.8.10",
     "mocha": "^2.0.1",
     "mochawait": "^2.0.0",

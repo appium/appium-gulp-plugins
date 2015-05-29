@@ -20,7 +20,7 @@ boilerplate({
   jscs: false,
   files: ["index.js", "lib/**/*.js", "test/**/*.js", "!test/fixtures/**","!test/generated/**"],
   buildName: "Appium Gulp Plugins",
-  extraDefaultTasks: ['test-transpile-lots-of-files']
+  extraDefaultTasks: ['e2e-test', 'test-transpile-lots-of-files']
 });
 
 gulp.task('transpile-es7-fixtures', ['clean'] , function () {

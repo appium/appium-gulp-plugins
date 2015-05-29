@@ -3,6 +3,10 @@ appium-gulp-plugins
 
 Custom plugins used accross appium modules
 
+## status
+
+[![Build Status](https://travis-ci.org/appium/appium-gulp-plugins.svg?branch=master)](https://travis-ci.org/appium/appium-gulp-plugins)
+
 ## boilerplate plugin
 
 This plugin sets up all the other typical plugins we use with a simple

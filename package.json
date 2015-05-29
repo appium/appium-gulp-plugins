@@ -44,8 +44,8 @@
     "vinyl-paths": "^1.0.0"
   },
   "scripts": {
-    "test": "$(npm bin)/gulp once",
-    "watch": "$(npm bin)/gulp"
+    "test": "gulp once",
+    "watch": "gulp"
   },
   "devDependencies": {
     "chai": "^2.2.0",

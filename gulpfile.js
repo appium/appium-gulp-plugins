@@ -18,7 +18,6 @@ boilerplate({
   testFiles: ['test/**/*-specs.js', '!test/fixtures'],
   transpile: true,
   jscs: false,
-  testReporter: 'spec',
   files: ["index.js", "lib/**/*.js", "test/**/*.js", "!test/fixtures/**","!test/generated/**"],
   buildName: "Appium Gulp Plugins",
   extraDefaultTasks: ['test-transpile-lots-of-files']

@@ -89,10 +89,10 @@ code like in the following:
 
 ```js
 // The regular way
-let a = function(t:string, n:number):string {return 'let's type code.'};
+let a = function (t:string, n:number):string {return 'let's type code.'};
 
 // Within comments
-let a = function(ti/*:string*/, n/*:number*/)/*:string*/ {return 'let's type code.'};
+let a = function (ti/*:string*/, n/*:number*/)/*:string*/ {return 'let's type code.'};
 ```
 
 ## watch plugin
@@ -107,7 +107,7 @@ the whole process on error. This should not be needed in gulp 4.0.
 var gulp = require('gulp'),
     spawnWatcher = require('./index').spawnWatcher.use(gulp);
 
-spawnWatcher.configure('watch', ['lib/**/*.js','test/**/*.js','!test/fixtures'], function() {
+spawnWatcher.configure('watch', ['lib/**/*.js','test/**/*.js','!test/fixtures'], function () {
   // this is the watch action
   return runSequence('test');
 });

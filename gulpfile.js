@@ -5,17 +5,23 @@ var gulp = require('gulp'),
     boilerplate = require('./index').boilerplate,
     mocha = require('gulp-mocha'),
     spawnWatcher = require('./index').spawnWatcher.use(gulp),
-    boilerplate = require('./index').boilerplate.use(gulp);
+    boilerplate = require('./index').boilerplate.use(gulp),
+    _ = require('lodash'),
+    Q = require('q'),
+    exec = Q.denodeify(require('child_process').exec),
+    glob = Q.denodeify(require('glob')),
+    assert = require('assert');
 
 var argv = require('yargs').count('flow').argv;
 
 boilerplate({
   testFiles: ['test/**/*-specs.js', '!test/fixtures'],
-  transpile: false,
+  transpile: true,
   jscs: false,
   testReporter: 'spec',
-  files: ["index.js", "lib/**/*.js", "test/**/*.js", "!test/fixtures"],
-  buildName: "Appium Gulp Plugins"
+  files: ["index.js", "lib/**/*.js", "test/**/*.js", "!test/fixtures/**","!test/generated/**"],
+  buildName: "Appium Gulp Plugins",
+  extraDefaultTasks: ['test-transpile-lots-of-files']
 });
 
 gulp.task('transpile-es7-fixtures', ['clean'] , function () {
@@ -24,6 +30,40 @@ gulp.task('transpile-es7-fixtures', ['clean'] , function () {
     .pipe(transpiler.stream())
     .on('error', spawnWatcher.handleError)
     .pipe(gulp.dest('build'));
+});
+
+gulp.task('generate-lots-of-files', function () {
+  return exec('rm -rf test/generated/es7 build/generated').then(function () {
+    return exec('mkdir -p test/generated/es7');
+  }).then(function () {
+    return Q.all(
+      _.times(24).map(function (i) {
+        return exec('cp test/fixtures/es7/lib/a.es7.js test/generated/es7/a' +
+                    (i + 1)  +'.es7.js');
+      }));
+  });
+});
+
+gulp.task('transpile-lots-of-files',['generate-lots-of-files'], function () {
+  var transpiler = new Transpiler(argv.flow ? {flow: true} : null);
+  return gulp.src('test/generated/es7/**/*.js')
+    .pipe(transpiler.stream())
+    .on('error', spawnWatcher.handleError)
+    .pipe(gulp.dest('build/generated'));
+});
+
+gulp.task('test-transpile-lots-of-files',['transpile-lots-of-files'], function () {
+  var numOfFiles;
+  return glob('test/generated/es7/**/*.js').then(function (files) {
+    numOfFiles = files.length;
+    assert(numOfFiles > 16);
+    return glob('build/generated/*.js');
+  }).then(function (files) {
+    assert(files.length === numOfFiles);
+    return glob('build/generated/*.es7.js');
+  }).then(function (files) {
+    assert(files.length === 0);
+  });
 });
 
 gulp.task('test-es7-mocha', ['transpile-es7-fixtures'] , function () {

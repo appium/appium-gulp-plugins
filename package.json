@@ -23,6 +23,7 @@
     "lib": "lib"
   },
   "dependencies": {
+    "appium-ci": "0.0.2",
     "babel": "^5.0.12",
     "babel-runtime": "^5.0.12",
     "clear": "^0.0.1",
@@ -38,6 +39,7 @@
     "lodash": "^3.6.0",
     "moment": "^2.8.4",
     "node-notifier": "^4.0.3",
+    "promisepipe": "^1.0.1",
     "q": "^1.1.2",
     "run-sequence": "^1.0.2",
     "source-map-support": "^0.2.10",

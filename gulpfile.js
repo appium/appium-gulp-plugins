@@ -15,10 +15,12 @@ var gulp = require('gulp'),
 var argv = require('yargs').count('flow').argv;
 
 boilerplate({
-  testFiles: ['test/**/*-specs.js', '!test/fixtures'],
   transpile: true,
   jscs: false,
   files: ["index.js", "lib/**/*.js", "test/**/*.js", "!test/fixtures/**","!test/generated/**"],
+  test: {
+    files: ['test/**/*-specs.js', '!test/fixtures']
+  },
   buildName: "Appium Gulp Plugins",
   extraDefaultTasks: ['e2e-test', 'test-transpile-lots-of-files']
 });

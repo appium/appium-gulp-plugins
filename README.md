@@ -153,6 +153,9 @@ spawnWatcher.clear(false);
 Native notification is enabled by default. To disable it use the
 `--no-notif` option.
 
+### collate logging and tests
+Set the environment variable `_FORCE_LOGS`
+
 ## hacking this package
 
 ### watch

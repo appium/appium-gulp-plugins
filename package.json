@@ -40,6 +40,7 @@
     "isparta": "^3.0.3",
     "jshint-stylish": "^2.0.0",
     "lodash": "^3.6.0",
+    "mocha": "^2.2.5",
     "moment": "^2.8.4",
     "node-notifier": "^4.0.3",
     "promisepipe": "^1.0.1",
@@ -57,7 +58,6 @@
     "chai": "^2.2.0",
     "glob": "^5.0.10",
     "gulp": "^3.8.10",
-    "mocha": "^2.0.1",
     "mochawait": "^2.0.0",
     "vargs": "^0.1.0",
     "yargs": "^3.7.0"

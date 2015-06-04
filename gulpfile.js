@@ -21,8 +21,11 @@ boilerplate({
   test: {
     files: ['test/**/*-specs.js', '!test/fixtures']
   },
+  coverage: {
+    files: ['test/**/*-specs.js', '!test/fixtures']
+  },
   buildName: "Appium Gulp Plugins",
-  extraDefaultTasks: ['e2e-test', 'test-transpile-lots-of-files']
+  extraDefaultTasks: ['coverage', 'e2e-test', 'test-transpile-lots-of-files']
 });
 
 gulp.task('transpile-es7-fixtures', ['clean'] , function () {

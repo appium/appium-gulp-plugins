@@ -22,7 +22,8 @@ boilerplate({
     files: ['test/**/*-specs.js', '!test/fixtures']
   },
   coverage: {
-    files: ['test/**/*-specs.js', '!test/fixtures']
+    files: ['test/**/*-specs.js', '!test/fixtures'],
+    verbose: true
   },
   buildName: "Appium Gulp Plugins",
   extraDefaultTasks: ['e2e-test', 'test-transpile-lots-of-files', 'coverage']

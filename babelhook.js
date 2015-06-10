@@ -1,4 +1,4 @@
-console.log('\nIgnore the errors above unless they are on appium source files.\n');
+console.log('\nIgnore the first _mocha error above.\n');
 require("babel/register")({
     stage: 1,
 });

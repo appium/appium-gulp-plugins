@@ -40,7 +40,8 @@ var DEFAULT_OPTS = {
   testFiles: null,
   testReporter: 'nyan',
   testTimeout: 8000,
-  buildName: null
+  buildName: null,
+  extraPrepublishTasks: []
 };
 ```
 

@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "appium-ci": "~0.0.4",
-    "babel-core": "=5.5.5",
+    "babel": "^5.8.23",
     "babel-runtime": "=5.5.5",
     "clear": "^0.0.1",
     "coveralls": "^2.11.2",

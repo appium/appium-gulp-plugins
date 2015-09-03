@@ -38,7 +38,7 @@
     "gulp-rename": "^1.2.0",
     "gulp-replace": "^0.5.0",
     "gulp-util": "^3.0.1",
-    "isparta": "^3.0.3",
+    "isparta": "=3.0.3",
     "jshint-stylish": "^2.0.0",
     "lodash": "^3.6.0",
     "mocha": "^2.2.5",

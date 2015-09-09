@@ -3,3 +3,4 @@ generated
 build
 *.log
 coverage
+coverage-e2e

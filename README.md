@@ -50,9 +50,9 @@ running tests, and with the default task being `gulp watch`.
 
 ## transpile plugin
 
-Babel compilation (via Traceur), sourcemaps and file renaming functionality in
+Babel compilation, sourcemaps and file renaming functionality in
 one plugin. `.es7.js` and `.es6.js` files will be automatically renamed to `.js
-files`. The necessary sourcemaps and traceur comments and imports are also
+files`. The necessary sourcemaps, comments and imports are also
 automatically added.
 
 ### usage

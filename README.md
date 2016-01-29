@@ -41,7 +41,8 @@ var DEFAULT_OPTS = {
   testReporter: 'nyan',
   testTimeout: 8000,
   buildName: null,
-  extraPrepublishTasks: []
+  extraPrepublishTasks: [],
+  preCommitTasks: ['jshint', 'once']
 };
 ```
 
@@ -158,6 +159,10 @@ Native notification is enabled by default. To disable it use the
 
 ### collate logging and tests
 Set the environment variable `_FORCE_LOGS`
+
+### Git pre-commit hooks
+
+The package uses [git-guppy](https://www.npmjs.com/package/git-guppy) to install pre-commit hooks. By default it runs, on a commit, the `jshint` and `once` tasks. Setting the `preCommitTasks` boilerplate option changes the tasks which will be done.
 
 ## hacking this package
 

@@ -2,7 +2,6 @@
 
 var gulp = require('gulp'),
     Transpiler = require('./index').Transpiler,
-    boilerplate = require('./index').boilerplate,
     mocha = require('gulp-mocha'),
     spawnWatcher = require('./index').spawnWatcher.use(gulp),
     boilerplate = require('./index').boilerplate.use(gulp),
@@ -26,7 +25,7 @@ boilerplate({
     verbose: true
   },
   buildName: "Appium Gulp Plugins",
-  extraDefaultTasks: ['e2e-test', 'test-transpile-lots-of-files', 'coverage']
+  extraDefaultTasks: ['e2e-test', 'test-transpile-lots-of-files', 'coverage'],
 });
 
 gulp.task('transpile-es7-fixtures', ['clean'] , function () {

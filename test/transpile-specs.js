@@ -17,7 +17,7 @@ var exec = Q.denodeify(function () {
 });
 
 // some debug
-function print(stdout, stderr) {
+function print (stdout, stderr) {
   if (process.env.VERBOSE) {
     if ((stdout || '').length) console.log('stdout -->', stdout);
     if ((stderr || '').length > 0) console.log('stderr -->', stderr);
@@ -94,7 +94,7 @@ describe('transpile-specs', function () {
           var output = stdout + stderr;
           output.should.include('This is really bad!');
           output.should.include('.es7.js');
-          output.should.include('a-throw-specs.es7.js:12');
+          output.should.include('a-throw-specs.es7.js:11');
        });
     });
 

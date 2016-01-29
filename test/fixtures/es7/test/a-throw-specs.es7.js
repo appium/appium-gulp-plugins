@@ -1,6 +1,5 @@
 // transpile:mocha
 
-import 'mochawait';
 import chai from 'chai';
 import {A} from '../lib/a';
 

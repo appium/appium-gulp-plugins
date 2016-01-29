@@ -58,7 +58,6 @@
   "devDependencies": {
     "chai": "^3.0.0",
     "glob": "^5.0.10",
-    "mochawait": "^2.0.0",
     "vargs": "^0.1.0",
     "yargs": "^3.7.0"
   }

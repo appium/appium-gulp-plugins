@@ -1,7 +1,6 @@
 /* global describe:true, it:true */
 // transpile:mocha
 
-import 'mochawait';
 import chai from 'chai';
 import {A} from '../lib/a';
 

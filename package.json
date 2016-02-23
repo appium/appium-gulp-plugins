@@ -4,7 +4,7 @@
   "keywords": [
     "appium"
   ],
-  "version": "1.4.1",
+  "version": "1.4.2",
   "author": "appium",
   "license": "Apache-2.0",
   "repository": {
@@ -36,6 +36,7 @@
     "gulp-jscs": "^3.0.2",
     "gulp-jshint": "https://github.com/appium/gulp-jshint/archive/master.tar.gz",
     "gulp-mocha": "^2.2.0",
+    "gulp-nsp": "^2.3.0",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
     "gulp-util": "^3.0.7",
@@ -57,7 +58,6 @@
     "watch": "gulp"
   },
   "devDependencies": {
-    "gulp-nsp": "^2.3.0",
     "chai": "^3.5.0",
     "glob": "^6.0.4",
     "vargs": "^0.1.0",

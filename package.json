@@ -57,6 +57,7 @@
     "watch": "gulp"
   },
   "devDependencies": {
+    "gulp-nsp": "^2.3.0",
     "chai": "^3.5.0",
     "glob": "^6.0.4",
     "vargs": "^0.1.0",

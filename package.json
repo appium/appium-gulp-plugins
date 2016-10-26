@@ -58,11 +58,25 @@
   },
   "scripts": {
     "test": "gulp once",
-    "watch": "gulp"
+    "watch": "gulp",
+    "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
+    "lint": "gulp eslint"
   },
+  "pre-commit": [
+    "precommit-msg",
+    "lint",
+    "test"
+  ],
   "devDependencies": {
-    "chai": "^3.5.0",
+    "babel-eslint": "^6.1.0",
+    "chai": "^3.0.0",
+    "chai-as-promised": "^5.1.0",
+    "eslint-config-appium": "^0.0.7",
+    "eslint-plugin-babel": "^3.3.0",
+    "eslint-plugin-import": "^1.9.2",
+    "eslint-plugin-mocha": "^3.0.0",
     "glob": "^6.0.4",
+    "pre-commit": "^1.1.3",
     "vargs": "^0.1.0",
     "yargs": "^3.32.0"
   }

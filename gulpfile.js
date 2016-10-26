@@ -16,7 +16,7 @@ var argv = require('yargs').count('flow').argv;
 boilerplate({
   transpile: true,
   jscs: false,
-  files: ["index.js", "lib/**/*.js", "test/**/*.js", "!test/fixtures/**","!test/generated/**"],
+  files: ["index.js", "lib/**/*.js", "test/**/*.js", "!test/fixtures/**", "!test/generated/**"],
   test: {
     files: ['test/**/*-specs.js', '!test/fixtures']
   },
@@ -28,7 +28,7 @@ boilerplate({
   extraDefaultTasks: ['e2e-test', 'test-transpile-lots-of-files', 'coverage'],
 });
 
-gulp.task('transpile-es7-fixtures', ['clean'] , function () {
+gulp.task('transpile-es7-fixtures', ['clean'], function () {
   var transpiler = new Transpiler(argv.flow ? {flow: true} : null);
   return gulp.src('test/fixtures/es7/**/*.js')
     .pipe(transpiler.stream())
@@ -48,7 +48,7 @@ gulp.task('generate-lots-of-files', function () {
   });
 });
 
-gulp.task('transpile-lots-of-files',['generate-lots-of-files'], function () {
+gulp.task('transpile-lots-of-files', ['generate-lots-of-files'], function () {
   var transpiler = new Transpiler(argv.flow ? {flow: true} : null);
   return gulp.src('test/generated/es7/**/*.js')
     .pipe(transpiler.stream())
@@ -56,7 +56,7 @@ gulp.task('transpile-lots-of-files',['generate-lots-of-files'], function () {
     .pipe(gulp.dest('build/generated'));
 });
 
-gulp.task('test-transpile-lots-of-files',['transpile-lots-of-files'], function () {
+gulp.task('test-transpile-lots-of-files', ['transpile-lots-of-files'], function () {
   var numOfFiles;
   return glob('test/generated/es7/**/*.js').then(function (files) {
     numOfFiles = files.length;
@@ -70,13 +70,13 @@ gulp.task('test-transpile-lots-of-files',['transpile-lots-of-files'], function (
   });
 });
 
-gulp.task('test-es7-mocha', ['transpile-es7-fixtures'] , function () {
+gulp.task('test-es7-mocha', ['transpile-es7-fixtures'], function () {
   return gulp.src('build/test/a-specs.js')
     .pipe(mocha())
     .on('error', spawnWatcher.handleError);
 });
 
-gulp.task('test-es7-mocha-throw', ['transpile-es7-fixtures'] , function () {
+gulp.task('test-es7-mocha-throw', ['transpile-es7-fixtures'], function () {
   return gulp.src('build/test/a-throw-specs.js')
     .pipe(mocha())
     .on('error', spawnWatcher.handleError);

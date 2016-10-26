@@ -19,8 +19,8 @@ var exec = Q.denodeify(function () {
 // some debug
 function print (stdout, stderr) {
   if (process.env.VERBOSE) {
-    if ((stdout || '').length) console.log('stdout -->', stdout);
-    if ((stderr || '').length > 0) console.log('stderr -->', stderr);
+    if ((stdout || '').length) console.log('stdout -->', stdout); // eslint-disable-line no-console
+    if ((stderr || '').length > 0) console.log('stderr -->', stderr); // eslint-disable-line no-console
   }
 }
 
@@ -33,12 +33,12 @@ describe('transpile-specs', function () {
         print(stdout, stderr);
         stderr.should.equal('');
         stdout.should.include('Finished');
-     }).then(function () {
-       return readFile('build/lib/a.js', 'utf8');
-     }).then(function (content) {
-      content.should.have.length.above(0);
-      content.should.include('sourceMapping');
-    });
+      }).then(function () {
+        return readFile('build/lib/a.js', 'utf8');
+      }).then(function (content) {
+        content.should.have.length.above(0);
+        content.should.include('sourceMapping');
+      });
   });
 
   var checkCode = function (opts) {
@@ -54,7 +54,7 @@ describe('transpile-specs', function () {
           print(stdout, stderr);
           stderr.should.equal('');
           stdout.should.include('hello world!');
-       });
+        });
     });
 
     it('should be able to run transpiled tests', function () {
@@ -63,7 +63,7 @@ describe('transpile-specs', function () {
           print(stdout, stderr);
           stderr.should.equal('');
           stdout.should.include('1 passing');
-      });
+        });
     });
 
     it('should not detect a rtts-assert error', function () {
@@ -73,29 +73,29 @@ describe('transpile-specs', function () {
           stderr.should.equal('');
           stdout.should.include('123');
           stdout.should.not.include('Invalid arguments given!');
-       });
+        });
     });
 
     it('should use sourcemap when throwing', function () {
       return exec('node build/lib/throw.js')
-       .spread(function (stdout, stderr) {
+        .spread(function (stdout, stderr) {
           print(stdout, stderr);
           var output = stdout + stderr;
           output.should.include('This is really bad!');
           output.should.include('.es7.js');
           output.should.include('throw.es7.js:7');
-       });
+        });
     });
 
     it('should use sourcemap when throwing within mocha', function () {
       return exec('./node_modules/.bin/mocha build/test/a-throw-specs.js')
-       .spread(function (stdout, stderr) {
+        .spread(function (stdout, stderr) {
           print(stdout, stderr);
           var output = stdout + stderr;
           output.should.include('This is really bad!');
           output.should.include('.es7.js');
           output.should.include('a-throw-specs.es7.js:11');
-       });
+        });
     });
 
     it('should be able to use gulp-mocha', function () {
@@ -104,7 +104,7 @@ describe('transpile-specs', function () {
           print(stdout, stderr);
           stderr.should.equal('');
           stdout.should.include('Finished');
-       });
+        });
     });
 
     it('should use sourcemap when throwing within gulp-mocha', function () {
@@ -114,10 +114,9 @@ describe('transpile-specs', function () {
           var output = stdout + stderr;
           output.should.include('This is really bad!');
           output.should.include('.es7.js');
-       });
+        });
     });
-
- };
+  };
 
   describe('check transpiled code', function () {
     checkCode();

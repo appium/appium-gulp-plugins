@@ -33,7 +33,6 @@ var DEFAULT_OPTS = {
   transpileOut: "build",
   babelOpts: {},
   linkBabelRuntime: true,
-  jscs: true,
   jshint: true,
   watch: true,
   test: true,
@@ -46,7 +45,7 @@ var DEFAULT_OPTS = {
 };
 ```
 
-As you can see, it defaults to transpiling with Babel, running jshint and jscs,
+As you can see, it defaults to transpiling with Babel, running jshint,
 running tests, and with the default task being `gulp watch`.
 
 ## transpile plugin

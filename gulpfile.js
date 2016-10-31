@@ -15,7 +15,6 @@ var argv = require('yargs').count('flow').argv;
 
 boilerplate({
   transpile: true,
-  jscs: false,
   files: ["index.js", "lib/**/*.js", "test/**/*.js", "!test/fixtures/**", "!test/generated/**"],
   test: {
     files: ['test/**/*-specs.js', '!test/fixtures']

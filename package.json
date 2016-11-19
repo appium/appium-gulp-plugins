@@ -36,7 +36,6 @@
     "gulp": "^3.9.0",
     "gulp-babel": "^5.1.0",
     "gulp-eslint": "^2.0.0",
-    "gulp-jscs": "^3.0.2",
     "gulp-jshint": "https://github.com/appium/gulp-jshint/archive/master.tar.gz",
     "gulp-mocha": "^2.2.0",
     "gulp-nsp": "^2.3.0",

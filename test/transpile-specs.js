@@ -27,11 +27,23 @@ function print (stdout, stderr) {
 describe('transpile-specs', function () {
   this.timeout(10000);
 
+  var nodeVersion;
+  var errorText = '';
+  before(function () {
+    return exec('node -v')
+      .then(function (version) {
+        nodeVersion = parseFloat(version[0].replace('v', ''));
+        if (nodeVersion >= 7) {
+          errorText = 'DeprecationWarning: os.tmpDir() is deprecated. Use os.tmpdir() instead.';
+        }
+      });
+  });
+
   it('should transpile es7 fixtures', function () {
     return exec('./node_modules/.bin/gulp transpile-es7-fixtures')
       .spread(function (stdout, stderr) {
         print(stdout, stderr);
-        stderr.should.equal('');
+        errorText.length ? stderr.should.include(errorText) : stderr.should.eql(errorText);
         stdout.should.include('Finished');
       }).then(function () {
         return readFile('build/lib/a.js', 'utf8');
@@ -102,7 +114,7 @@ describe('transpile-specs', function () {
       return exec('./node_modules/.bin/gulp test-es7-mocha' + gulpOpts)
         .spread(function (stdout, stderr) {
           print(stdout, stderr);
-          stderr.should.equal('');
+          errorText.length ? stderr.should.include(errorText) : stderr.should.eql(errorText);
           stdout.should.include('Finished');
         });
     });

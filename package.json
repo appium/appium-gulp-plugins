@@ -28,7 +28,7 @@
     "babel-eslint": "^6.0.0",
     "babel-runtime": "=5.8.24",
     "clear": "^0.0.1",
-    "coveralls": "^2.11.2",
+    "coveralls": "^2.13.0",
     "del": "^2.2.0",
     "eslint": "^2.5.1",
     "git-guppy": "^1.1.0",
@@ -67,7 +67,6 @@
     "test"
   ],
   "devDependencies": {
-    "babel-eslint": "^6.1.0",
     "chai": "^3.0.0",
     "chai-as-promised": "^5.1.0",
     "eslint-config-appium": "^0.0.7",

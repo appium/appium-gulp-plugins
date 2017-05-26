@@ -25,6 +25,7 @@ boilerplate({
   },
   buildName: "Appium Gulp Plugins",
   extraDefaultTasks: ['e2e-test', 'test-transpile-lots-of-files', 'coverage'],
+  eslint: true,
 });
 
 gulp.task('transpile-es7-fixtures', ['clean'], function () {

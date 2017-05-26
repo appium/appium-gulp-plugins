@@ -41,7 +41,8 @@ var DEFAULT_OPTS = {
   testTimeout: 8000,
   buildName: null,
   extraPrepublishTasks: [],
-  preCommitTasks: ['jshint', 'once']
+  preCommitTasks: ['jshint', 'once'],
+  eslint: false
 };
 ```
 

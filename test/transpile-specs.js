@@ -1,6 +1,7 @@
+/* eslint promise/prefer-await-to-then: 0 */
 "use strict";
 
-var Q = require('q'),
+let Q = require('q'),
     Args = require("vargs").Constructor,
     _exec = require('child_process').exec,
     chai = require('chai'),
@@ -9,8 +10,8 @@ var Q = require('q'),
 chai.should();
 
 // we don't care about exec errors
-var exec = Q.denodeify(function () {
-  var args = new Args (arguments);
+let exec = Q.denodeify(function () {
+  let args = new Args (arguments);
   _exec.apply(null, args.all.concat([function (err, stdout, stderr) {
     args.callback(null, stdout, stderr);
   }]));
@@ -19,8 +20,12 @@ var exec = Q.denodeify(function () {
 // some debug
 function print (stdout, stderr) {
   if (process.env.VERBOSE) {
-    if ((stdout || '').length) console.log('stdout -->', stdout); // eslint-disable-line no-console
-    if ((stderr || '').length > 0) console.log('stderr -->', stderr); // eslint-disable-line no-console
+    if ((stdout || '').length) {
+      console.log('stdout -->', stdout); // eslint-disable-line no-console
+    }
+    if ((stderr || '').length > 0) {
+      console.log('stderr -->', stderr); // eslint-disable-line no-console
+    }
   }
 }
 
@@ -41,9 +46,9 @@ describe('transpile-specs', function () {
       });
   });
 
-  var checkCode = function (opts) {
+  let checkCode = function (opts) {
     opts = opts || {};
-    var gulpOpts = opts.flow ? ' --flow' : '';
+    let gulpOpts = opts.flow ? ' --flow' : '';
     before(function () {
       return exec('./node_modules/.bin/gulp transpile-es7-fixtures' + gulpOpts);
     });
@@ -80,7 +85,7 @@ describe('transpile-specs', function () {
       return exec('node build/lib/throw.js')
         .spread(function (stdout, stderr) {
           print(stdout, stderr);
-          var output = stdout + stderr;
+          let output = stdout + stderr;
           output.should.include('This is really bad!');
           output.should.include('.es7.js');
           output.should.include('throw.es7.js:7');
@@ -91,7 +96,7 @@ describe('transpile-specs', function () {
       return exec('./node_modules/.bin/mocha build/test/a-throw-specs.js')
         .spread(function (stdout, stderr) {
           print(stdout, stderr);
-          var output = stdout + stderr;
+          let output = stdout + stderr;
           output.should.include('This is really bad!');
           output.should.include('.es7.js');
           output.should.include('a-throw-specs.es7.js:11');
@@ -111,7 +116,7 @@ describe('transpile-specs', function () {
       return exec('./node_modules/.bin/gulp --no-notif test-es7-mocha-throw' + gulpOpts)
         .spread(function (stdout, stderr) {
           print(stdout, stderr);
-          var output = stdout + stderr;
+          let output = stdout + stderr;
           output.should.include('This is really bad!');
           output.should.include('.es7.js');
         });
@@ -127,5 +132,4 @@ describe('transpile-specs', function () {
   describe.skip('check transpiled code when flow is enabled', function () {
     checkCode({flow: true});
   });
-
 });

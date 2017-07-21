@@ -17,7 +17,7 @@ configuration object.
 Basically just set up the `boilerplate` plugin as follows:
 
 ```js
-var gulp = require('gulp'),
+let gulp = require('gulp'),
     boilerplate = require('appium-gulp-plugins').boilerplate.use(gulp);
 
 boilerplate({build: "My Project Name"});
@@ -27,13 +27,12 @@ You can pass a lot of options to configure `boilerplate`. Here are the options
 along with their defaults (from `lib/boilerplate.js`):
 
 ```js
-var DEFAULT_OPTS = {
+let DEFAULT_OPTS = {
   files: ["*.js", "lib/**/*.js", "test/**/*.js", "!gulpfile.js"],
   transpile: true,
   transpileOut: "build",
   babelOpts: {},
   linkBabelRuntime: true,
-  jshint: true,
   watch: true,
   test: true,
   testFiles: null,
@@ -41,12 +40,11 @@ var DEFAULT_OPTS = {
   testTimeout: 8000,
   buildName: null,
   extraPrepublishTasks: [],
-  preCommitTasks: ['jshint', 'once'],
-  eslint: false
+  eslint: true
 };
 ```
 
-As you can see, it defaults to transpiling with Babel, running jshint,
+As you can see, it defaults to transpiling with Babel, running `eslint`
 running tests, and with the default task being `gulp watch`.
 
 ## transpile plugin
@@ -61,11 +59,11 @@ automatically added.
 1/ Configure gulp as below:
 
 ``` js
-var gulp = require('gulp'),
+let gulp = require('gulp'),
 Transpiler = require('appium-gulp-plugins').Transpiler;
 
 gulp.task('transpile', function () {
-  var transpiler = new Transpiler();
+  let transpiler = new Transpiler();
   // babel options are configurable in transpiler.babelOpts
 
   return gulp.src('test/fixtures/es7/**/*.js')
@@ -87,7 +85,7 @@ Type assertions are not yet supported, but if you use Flow you can pass in an
 option to the traspiler:
 
 ```js
-var transpiler = new Transpiler({flow: true});
+let transpiler = new Transpiler({flow: true});
 ```
 
 This will leave the type annotations un-stripped. You may specify type in your
@@ -112,7 +110,7 @@ Files in the `/test` directory that are named `.*-specs.js` are run. Tests which
 ### usage
 
 ```
-var gulp = require('gulp'),
+let gulp = require('gulp'),
     spawnWatcher = require('./index').spawnWatcher.use(gulp);
 
 spawnWatcher.configure('watch', ['lib/**/*.js','test/**/*.js','!test/fixtures'], function () {
@@ -159,10 +157,6 @@ Native notification is enabled by default. To disable it use the
 
 ### collate logging and tests
 Set the environment variable `_FORCE_LOGS`
-
-### Git pre-commit hooks
-
-The package uses [git-guppy](https://www.npmjs.com/package/git-guppy) to install pre-commit hooks. By default it runs, on a commit, the `jshint` and `once` tasks. Setting the `preCommitTasks` boilerplate option changes the tasks which will be done.
 
 ## hacking this package
 

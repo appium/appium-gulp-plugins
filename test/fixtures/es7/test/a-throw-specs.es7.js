@@ -7,8 +7,7 @@ chai.should();
 
 describe('a-throw', () => {
   it('should throw', () => {
-    var a = new A('hello world!');
+    let a = new A('hello world!');
     a.throwError('This is really bad!');
   });
 });
-

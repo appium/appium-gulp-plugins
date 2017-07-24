@@ -45,7 +45,7 @@
     "mocha": "^3.4.2",
     "moment": "^2.12.0",
     "node-notifier": "^5.1.2",
-    "promisepipe": "^2.0.0",
+    "promisepipe": "^1.0.1",
     "q": "^1.4.1",
     "run-sequence": "^1.1.5",
     "source-map-support": "^0.4.0",

@@ -1,6 +1,7 @@
+/* eslint promise/prefer-await-to-then: 0 */
 "use strict";
 
-var gulp = require('gulp'),
+let gulp = require('gulp'),
     Transpiler = require('./index').Transpiler,
     mocha = require('gulp-mocha'),
     spawnWatcher = require('./index').spawnWatcher.use(gulp),
@@ -11,7 +12,7 @@ var gulp = require('gulp'),
     glob = Q.denodeify(require('glob')),
     assert = require('assert');
 
-var argv = require('yargs').count('flow').argv;
+let argv = require('yargs').count('flow').argv;
 
 boilerplate({
   transpile: true,
@@ -29,7 +30,7 @@ boilerplate({
 });
 
 gulp.task('transpile-es7-fixtures', ['clean'], function () {
-  var transpiler = new Transpiler(argv.flow ? {flow: true} : null);
+  let transpiler = new Transpiler(argv.flow ? {flow: true} : null);
   return gulp.src('test/fixtures/es7/**/*.js')
     .pipe(transpiler.stream())
     .on('error', spawnWatcher.handleError)
@@ -49,7 +50,7 @@ gulp.task('generate-lots-of-files', function () {
 });
 
 gulp.task('transpile-lots-of-files', ['generate-lots-of-files'], function () {
-  var transpiler = new Transpiler(argv.flow ? {flow: true} : null);
+  let transpiler = new Transpiler(argv.flow ? {flow: true} : null);
   return gulp.src('test/generated/es7/**/*.js')
     .pipe(transpiler.stream())
     .on('error', spawnWatcher.handleError)
@@ -57,7 +58,7 @@ gulp.task('transpile-lots-of-files', ['generate-lots-of-files'], function () {
 });
 
 gulp.task('test-transpile-lots-of-files', ['transpile-lots-of-files'], function () {
-  var numOfFiles;
+  let numOfFiles;
   return glob('test/generated/es7/**/*.js').then(function (files) {
     numOfFiles = files.length;
     assert(numOfFiles > 16);

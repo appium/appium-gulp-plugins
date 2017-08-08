@@ -109,7 +109,7 @@ Files in the `/test` directory that are named `.*-specs.js` are run. Tests which
 
 ### usage
 
-```
+```js
 let gulp = require('gulp'),
     spawnWatcher = require('./index').spawnWatcher.use(gulp);
 

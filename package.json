@@ -57,7 +57,7 @@
   "scripts": {
     "test": "gulp once",
     "watch": "gulp watch",
-    "coveralls": "gulp coveralls",
+    "coverage": "gulp coveralls",
     "build": "gulp transpile",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "lint": "gulp eslint"

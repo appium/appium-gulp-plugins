@@ -57,11 +57,12 @@
     "coverage": "gulp coveralls",
     "build": "gulp transpile",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
+    "precommit-test": "REPORTER=dot gulp once",
     "lint": "gulp eslint"
   },
   "pre-commit": [
     "precommit-msg",
-    "test"
+    "precommit-test"
   ],
   "devDependencies": {
     "chai": "^4.1.0",

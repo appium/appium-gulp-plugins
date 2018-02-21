@@ -1,39 +1,45 @@
-/* eslint promise/prefer-await-to-then: 0 */
 "use strict";
 
-let Q = require('q'),
-    Args = require("vargs").Constructor,
-    _exec = require('child_process').exec,
-    chai = require('chai'),
-    readFile = Q.denodeify(require('fs').readFile);
+import B from 'bluebird';
+import cp from 'child_process';
+import chai from 'chai';
+import fs from 'fs';
+
 
 chai.should();
 
+const GULP = './node_modules/.bin/gulp';
+const MOCHA = './node_modules/.bin/mocha';
+
+const readFile = B.promisify(fs.readFile);
+
 // we don't care about exec errors
-let exec = Q.denodeify(function () {
-  let args = new Args (arguments);
-  _exec.apply(null, args.all.concat([function (err, stdout, stderr) {
-    args.callback(null, stdout, stderr);
-  }]));
-});
+const exec = function exec (...args) {
+  return new B(function (resolve) {
+    cp.exec(args.join(' '), function (err, stdout, stderr) {
+      resolve([stdout, stderr]);
+    });
+  });
+};
 
 // some debug
-function print (stdout, stderr) {
+const print = function print (stdout, stderr) {
   if (process.env.VERBOSE) {
     if ((stdout || '').length) {
-      console.log('stdout -->', stdout); // eslint-disable-line no-console
+      console.log(`stdout --> '${stdout}'`);
     }
-    if ((stderr || '').length > 0) {
-      console.log('stderr -->', stderr); // eslint-disable-line no-console
+    if ((stderr || '').length) {
+      console.log(`stderr --> '${stderr}'`);
     }
   }
-}
+};
 
 describe('transpile-specs', function () {
-  this.timeout(10000);
+  this.timeout(12000);
+  this.retries(0);
 
   it('should transpile es7 fixtures', function () {
-    return exec('./node_modules/.bin/gulp transpile-es7-fixtures')
+    return exec(`${GULP} transpile-es7-fixtures`)
       .spread(function (stdout, stderr) {
         print(stdout, stderr);
         stderr.should.eql('');
@@ -46,11 +52,9 @@ describe('transpile-specs', function () {
       });
   });
 
-  let checkCode = function (opts) {
-    opts = opts || {};
-    let gulpOpts = opts.flow ? ' --flow' : '';
+  describe('check transpiled code', function () {
     before(function () {
-      return exec('./node_modules/.bin/gulp transpile-es7-fixtures' + gulpOpts);
+      return exec(`${GULP} transpile-es7-fixtures`);
     });
 
     it('should be able to run transpiled code', function () {
@@ -63,7 +67,7 @@ describe('transpile-specs', function () {
     });
 
     it('should be able to run transpiled tests', function () {
-      return exec('./node_modules/.bin/mocha build/test/a-specs.js')
+      return exec(`${MOCHA} build/test/a-specs.js`)
         .spread(function (stdout, stderr) {
           print(stdout, stderr);
           stderr.should.equal('');
@@ -93,7 +97,7 @@ describe('transpile-specs', function () {
     });
 
     it('should use sourcemap when throwing within mocha', function () {
-      return exec('./node_modules/.bin/mocha build/test/a-throw-specs.js')
+      return exec(`${MOCHA} build/test/a-throw-specs.js`)
         .spread(function (stdout, stderr) {
           print(stdout, stderr);
           let output = stdout + stderr;
@@ -104,7 +108,7 @@ describe('transpile-specs', function () {
     });
 
     it('should be able to use gulp-mocha', function () {
-      return exec('./node_modules/.bin/gulp test-es7-mocha' + gulpOpts)
+      return exec(`${GULP} test-es7-mocha`)
         .spread(function (stdout, stderr) {
           print(stdout, stderr);
           stderr.should.eql('');
@@ -113,7 +117,7 @@ describe('transpile-specs', function () {
     });
 
     it('should use sourcemap when throwing within gulp-mocha', function () {
-      return exec('./node_modules/.bin/gulp --no-notif test-es7-mocha-throw' + gulpOpts)
+      return exec(`${GULP} --no-notif test-es7-mocha-throw`)
         .spread(function (stdout, stderr) {
           print(stdout, stderr);
           let output = stdout + stderr;
@@ -121,15 +125,5 @@ describe('transpile-specs', function () {
           output.should.include('.es7.js');
         });
     });
-  };
-
-  describe('check transpiled code', function () {
-    checkCode();
-  });
-
-  // skip because flow requires extra setup and we might not want to support
-  // it at all
-  describe.skip('check transpiled code when flow is enabled', function () {
-    checkCode({flow: true});
   });
 });

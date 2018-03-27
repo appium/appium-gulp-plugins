@@ -6,8 +6,8 @@ import {A} from '../lib/a';
 
 chai.should();
 
-describe('a e2e', () => {
-  it('should be able to get text', () => {
+describe('a e2e', function () {
+  it('should be able to get text', function () {
     let a = new A('hello world!');
     a.getText().should.equal('hello world!');
   });

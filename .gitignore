@@ -4,4 +4,4 @@ build
 *.log
 coverage
 coverage-e2e
-package-lock.json
+package-lock.json*

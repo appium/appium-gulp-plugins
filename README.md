@@ -6,6 +6,7 @@ Custom plugins used accross appium modules
 ## status
 
 [![Build Status](https://travis-ci.org/appium/appium-gulp-plugins.svg?branch=master)](https://travis-ci.org/appium/appium-gulp-plugins)
+[![Greenkeeper badge](https://badges.greenkeeper.io/appium/appium-gulp-plugins.svg)](https://greenkeeper.io/)
 
 ## boilerplate plugin
 

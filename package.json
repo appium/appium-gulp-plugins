@@ -22,8 +22,13 @@
   "main": "./index.js",
   "bin": {},
   "directories": {
-    "lib": "lib"
+    "lib": "lib",
+    "build": "build",
+    "test": "test"
   },
+  "files": [
+    "lib"
+  ],
   "dependencies": {
     "@babel/core": "^7.0.0",
     "@babel/plugin-transform-runtime": "^7.0.0",

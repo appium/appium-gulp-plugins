@@ -27,6 +27,7 @@
     "test": "test"
   },
   "files": [
+    "index.js",
     "lib"
   ],
   "dependencies": {
@@ -38,8 +39,8 @@
     "ajv": "^6.0.0",
     "ansi-red": "^0.1.1",
     "appium-ci": "^0.1.0",
-    "babel-eslint": "^8.2.1",
-    "babel-plugin-istanbul": "^4.1.5",
+    "babel-eslint": "^9.0.0",
+    "babel-plugin-istanbul": "^5.0.1",
     "babel-plugin-source-map-support": "^2.0.1",
     "bluebird": "^3.5.1",
     "clear": "^0.1.0",
@@ -49,7 +50,7 @@
     "fancy-log": "^1.3.2",
     "globby": "^8.0.0",
     "gulp": "^4.0.0",
-    "gulp-babel": "next",
+    "gulp-babel": "8.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-debug": "^4.0.0",
     "gulp-eslint": "^5.0.0",
@@ -62,7 +63,7 @@
     "mocha": "^5.0.1",
     "moment": "^2.12.0",
     "node-notifier": "^5.1.2",
-    "nyc": "^12.0.2",
+    "nyc": "^13.0.1",
     "replace-in-file": "^3.4.0",
     "run-sequence": "^2.2.1",
     "semver": "^5.5.0",

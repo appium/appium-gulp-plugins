@@ -23,7 +23,7 @@
     "lib": "lib"
   },
   "dependencies": {
-    "appium-ci": "~0.1.0",
+    "appium-ci": "~0.2.0",
     "babel": "^5.8.23",
     "babel-eslint": "^7.1.1",
     "babel-runtime": "=5.8.24",

@@ -80,26 +80,6 @@ gulp.task('transpile', function () {
 
 Regular lib files do not need any extra comments.
 
-### Type assertions
-
-Type assertions are not yet supported, but if you use Flow you can pass in an
-option to the traspiler:
-
-```js
-let transpiler = new Transpiler({flow: true});
-```
-
-This will leave the type annotations un-stripped. You may specify type in your
-code like in the following:
-
-```js
-// The regular way
-let a = function (t:string, n:number):string {return 'let's type code.'};
-
-// Within comments
-let a = function (ti/*:string*/, n/*:number*/)/*:string*/ {return 'let's type code.'};
-```
-
 ## watch plugin
 
 There are some issues with Gulp 3.x error handling which cause the default

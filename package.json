@@ -2,7 +2,9 @@
   "name": "appium-gulp-plugins",
   "description": "Custom gulp plugins to be used across all appium modules",
   "keywords": [
-    "appium"
+    "appium",
+    "gulp",
+    "tools"
   ],
   "version": "2.4.1",
   "author": "appium",
@@ -20,43 +22,61 @@
   "main": "./index.js",
   "bin": {},
   "directories": {
-    "lib": "lib"
+    "lib": "lib",
+    "build": "build",
+    "test": "test"
   },
+  "files": [
+    "index.js",
+    "lib"
+  ],
   "dependencies": {
-    "appium-ci": "~0.1.0",
-    "babel": "^5.8.23",
-    "babel-eslint": "^7.1.1",
-    "babel-runtime": "=5.8.24",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "@babel/runtime": "^7.0.0",
+    "ajv": "^6.0.0",
+    "ansi-red": "^0.1.1",
+    "appium-ci": "^0.2.0",
+    "babel-eslint": "^9.0.0",
+    "babel-plugin-istanbul": "^5.0.1",
+    "babel-plugin-source-map-support": "^2.0.1",
+    "bluebird": "^3.5.1",
     "clear": "^0.1.0",
     "coveralls": "^3.0.0",
     "del": "^3.0.0",
-    "eslint": "^3.10.2",
+    "eslint": "^5.2.0",
     "fancy-log": "^1.3.2",
-    "globby": "^8.0.1",
-    "gulp": "^3.9.0",
-    "gulp-babel": "^5.1.0",
-    "gulp-eslint": "^2.0.0",
+    "globby": "^8.0.0",
+    "gulp": "^4.0.0",
+    "gulp-babel": "8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-debug": "^4.0.0",
+    "gulp-eslint": "^5.0.0",
     "gulp-if": "^2.0.2",
-    "gulp-mocha": "^4.3.1",
+    "gulp-mocha": "^6.0.0",
     "gulp-rename": "^1.2.2",
-    "gulp-replace": "^0.6.1",
-    "gulp-sourcemaps": "^2.2.0",
-    "gulp-util": "^3.0.7",
-    "istanbul": "next",
+    "gulp-replace": "^1.0.0",
+    "gulp-sourcemaps": "^2.6.4",
     "lodash": "^4.0.1",
-    "mocha": "^5.1.1",
+    "mocha": "^5.0.1",
     "moment": "^2.12.0",
     "node-notifier": "^5.1.2",
-    "q": "^1.4.1",
+    "nyc": "^13.0.1",
     "replace-in-file": "^3.4.0",
     "run-sequence": "^2.2.1",
     "semver": "^5.5.0",
-    "source-map-support": "^0.5.5",
+    "source-map-support": "^0.5.3",
     "through2": "^2.0.0",
     "vinyl-paths": "^2.1.0",
     "yargs": "^12.0.1"
   },
+  "peerDependencies": {
+    "@babel/runtime": "^7.0.0"
+  },
   "scripts": {
+    "clean": "rm -rf node_modules && rm -f package-lock.json && npm install",
     "test": "gulp once",
     "watch": "gulp watch",
     "coverage": "gulp coveralls",
@@ -72,35 +92,47 @@
   "devDependencies": {
     "chai": "^4.1.0",
     "chai-as-promised": "^7.1.1",
-    "eslint-config-appium": "^2.0.1",
-    "eslint-plugin-babel": "^3.3.0",
+    "eslint-config-appium": "^3.0.0",
     "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-mocha": "^4.7.0",
-    "eslint-plugin-promise": "^3.3.1",
-    "glob": "^7.1.2",
-    "pre-commit": "^1.1.3",
-    "vargs": "^0.1.0"
+    "eslint-plugin-mocha": "^5.1.0",
+    "eslint-plugin-promise": "^4.0.0",
+    "pre-commit": "^1.1.3"
   },
-  "greenkeeper": {
-    "ignore": [
-      "babel",
-      "babel-eslint",
-      "babel-preset-env",
-      "eslint",
-      "eslint-plugin-babel",
-      "eslint-plugin-import",
-      "eslint-plugin-mocha",
-      "eslint-plugin-promise",
-      "gulp",
-      "gulp-babel",
-      "gulp-eslint",
-      "gulp-if",
-      "gulp-mocha",
-      "gulp-rename",
-      "gulp-replace",
-      "gulp-sourcemaps",
-      "gulp-util",
-      "babel-runtime"
-    ]
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "8"
+          }
+        }
+      ]
+    ],
+    "plugins": [
+      "source-map-support"
+    ],
+    "env": {
+      "coverage": {
+        "plugins": [
+          [
+            "istanbul",
+            {
+              "exclude": [
+                "test",
+                "build"
+              ]
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "nyc": {
+    "require": [
+      "@babel/register"
+    ],
+    "sourceMap": false,
+    "instrument": false
   }
 }

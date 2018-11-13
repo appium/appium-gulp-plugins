@@ -93,10 +93,10 @@ boilerplate({
     files: ['${testDir}/**/*-specs.js', '!${testDir}/fixtures', '!${testDir}/**/*-e2e-specs.js'],
   },
   coverage: {
-    files: ['test/**/*-specs.js', '!test/fixtures', '!test/**/*-e2e-specs.js', '!test/generated'],
+    files: ['./build/test/**/*-specs.js', '!./build/test/fixtures', '!./build/test/**/*-e2e-specs.js', '!./build/test/generated'],
     verbose: true,
   },
   buildName: 'Appium Gulp Plugins',
-  extraDefaultTasks: ['e2e-test', 'test-transpile-lots-of-files', 'coverage'],
+  extraDefaultTasks: ['e2e-test', 'test-transpile-lots-of-files'],
   testReporter: 'dot',
 });

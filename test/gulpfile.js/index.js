@@ -5,8 +5,11 @@ const gulp = require('gulp');
 const Transpiler = require('../../index').Transpiler;
 const TsTranspiler = require('../../index').TsTranspiler;
 const spawnWatcher = require('../../index').spawnWatcher.use(gulp);
+const isVerbose = require('../../index').isVerbose;
 const vinylPaths = require('vinyl-paths');
 const del = require('del');
+const debug = require('gulp-debug');
+const gulpIf = require('gulp-if');
 
 
 gulp.task('clean-fixtures', function () {
@@ -19,6 +22,7 @@ gulp.task('transpile-es7-fixtures', function () {
   let transpiler = new Transpiler();
   return gulp
     .src('test/fixtures/es7/**/*.js')
+    .pipe(gulpIf(isVerbose(), debug()))
     .pipe(transpiler.stream())
     .on('error', spawnWatcher.handleError)
     .pipe(gulp.dest('build'));
@@ -28,6 +32,7 @@ gulp.task('transpile-ts-fixtures', function () {
   let transpiler = new TsTranspiler();
   return gulp
     .src('test/fixtures/ts/**/*.ts')
+    .pipe(gulpIf(isVerbose(), debug()))
     .pipe(transpiler.stream())
     .on('error', spawnWatcher.handleError)
     .pipe(gulp.dest('build'));

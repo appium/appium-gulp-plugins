@@ -93,7 +93,7 @@
     "build": "gulp transpile",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "precommit-test": "REPORTER=dot gulp once",
-    "lint": "gulp eslint",
+    "lint": "gulp lint",
     "lint:fix": "gulp eslint --fix"
   },
   "pre-commit": [
@@ -101,6 +101,8 @@
     "precommit-test"
   ],
   "devDependencies": {
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.12.18",
     "chai": "^4.1.0",
     "pre-commit": "^1.1.3"
   }

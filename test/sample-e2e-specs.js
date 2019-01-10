@@ -1,5 +1,4 @@
-/* eslint promise/prefer-await-to-then: 0 */
-"use strict";
+'use strict';
 
 import chai from 'chai';
 

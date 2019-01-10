@@ -1,4 +1,7 @@
-"use strict";
+/* eslint-disable no-console */
+/* eslint-disable promise/prefer-await-to-callbacks */
+/* eslint-disable promise/prefer-await-to-then */
+'use strict';
 
 import B from 'bluebird';
 import cp from 'child_process';
@@ -35,7 +38,7 @@ const print = function print (stdout, stderr) {
 };
 
 describe('transpile-specs', function () {
-  this.timeout(12000);
+  this.timeout(60000);
   this.retries(0);
 
   it('should transpile es7 fixtures', function () {
@@ -52,31 +55,68 @@ describe('transpile-specs', function () {
       });
   });
 
-  describe('check transpiled code', function () {
+  it('should transpile ts fixtures', function () {
+    return exec(`${GULP} transpile-ts-fixtures`)
+      .spread(function (stdout, stderr) {
+        print(stdout, stderr);
+        stderr.should.eql('');
+        stdout.should.include('Finished');
+      }).then(function () {
+        return readFile('build/lib/b.js', 'utf8');
+      }).then(function (content) {
+        content.should.have.length.above(0);
+        content.should.include('sourceMapping');
+      });
+  });
+
+  describe('check transpiled', function () {
     before(function () {
-      return exec(`${GULP} transpile-es7-fixtures`);
+      return exec(`${GULP} transpile-fixtures`);
     });
 
-    it('should be able to run transpiled code', function () {
-      return exec('node build/lib/run.js')
-        .spread(function (stdout, stderr) {
-          print(stdout, stderr);
-          stderr.should.equal('');
-          stdout.should.include('hello world!');
-        });
+    describe('code', function () {
+      it('should be able to run transpiled es7 code', function () {
+        return exec('node build/lib/a-run.js')
+          .spread(function (stdout, stderr) {
+            print(stdout, stderr);
+            stderr.should.equal('');
+            stdout.should.include('hello world!');
+          });
+      });
+
+      it('should be able to run transpiled ts code', function () {
+        return exec('node build/lib/b-run.js')
+          .spread(function (stdout, stderr) {
+            print(stdout, stderr);
+            stderr.should.equal('');
+            stdout.should.include('hello world!');
+          });
+      });
     });
 
-    it('should be able to run transpiled tests', function () {
-      return exec(`${MOCHA} build/test/a-specs.js`)
-        .spread(function (stdout, stderr) {
-          print(stdout, stderr);
-          stderr.should.equal('');
-          stdout.should.include('1 passing');
-        });
+    describe('tests', function () {
+      it('should be able to run transpiled es7 tests', function () {
+        return exec(`${MOCHA} build/test/a-specs.js`)
+          .spread(function (stdout, stderr) {
+            print(stdout, stderr);
+            stderr.should.equal('');
+            stdout.should.include('1 passing');
+          });
+      });
+
+      it('should be able to run transpiled s tests', function () {
+        return exec(`${MOCHA} build/test/b-specs.js`)
+          .spread(function (stdout, stderr) {
+            print(stdout, stderr);
+            stderr.should.equal('');
+            stdout.should.include('1 passing');
+          });
+      });
     });
 
+    // TypeScript will not compile such errors, so no need to test
     it('should not detect a rtts-assert error', function () {
-      return exec('node build/lib/rtts-assert-error.js')
+      return exec('node build/lib/a-rtts-assert-error.js')
         .spread(function (stdout, stderr) {
           print(stdout, stderr);
           stderr.should.equal('');
@@ -85,45 +125,86 @@ describe('transpile-specs', function () {
         });
     });
 
-    it('should use sourcemap when throwing', function () {
-      return exec('node build/lib/throw.js')
-        .spread(function (stdout, stderr) {
-          print(stdout, stderr);
-          let output = stdout + stderr;
-          output.should.include('This is really bad!');
-          output.should.include('.es7.js');
-          output.should.include('throw.es7.js:7');
-        });
+    describe('sourcemaps', function () {
+      it('should use sourcemap when throwing (es7)', function () {
+        return exec('node build/lib/a-throw.js')
+          .spread(function (stdout, stderr) {
+            print(stdout, stderr);
+            let output = stdout + stderr;
+            output.should.include('This is really bad!');
+            output.should.include('a-throw.es7.js:7');
+          });
+      });
+
+      it('should use sourcemap when throwing (ts)', function () {
+        return exec('node build/lib/b-throw.js')
+          .spread(function (stdout, stderr) {
+            print(stdout, stderr);
+            let output = stdout + stderr;
+            output.should.include('This is really bad!');
+            output.should.include('b-throw.ts:6');
+          });
+      });
+
+      it('should use sourcemap when throwing within mocha (es7)', function () {
+        return exec(`${MOCHA} build/test/a-throw-specs.js`)
+          .spread(function (stdout, stderr) {
+            print(stdout, stderr);
+            let output = stdout + stderr;
+            output.should.include('This is really bad!');
+            output.should.include('a-throw-specs.es7.js:8');
+          });
+      });
+
+      it('should use sourcemap when throwing within mocha (ts)', function () {
+        return exec(`${MOCHA} build/test/b-throw-specs.js`)
+          .spread(function (stdout, stderr) {
+            print(stdout, stderr);
+            let output = stdout + stderr;
+            output.should.include('This is really bad!');
+            output.should.include('b-throw-specs.ts:7');
+          });
+      });
     });
 
-    it('should use sourcemap when throwing within mocha', function () {
-      return exec(`${MOCHA} build/test/a-throw-specs.js`)
-        .spread(function (stdout, stderr) {
-          print(stdout, stderr);
-          let output = stdout + stderr;
-          output.should.include('This is really bad!');
-          output.should.include('.es7.js');
-          output.should.include('a-throw-specs.es7.js:11');
-        });
-    });
+    describe('gulp-mocha', function () {
+      it('should be able to use gulp-mocha (es7)', function () {
+        return exec(`${GULP} test-es7-mocha`)
+          .spread(function (stdout, stderr) {
+            print(stdout, stderr);
+            stderr.should.eql('');
+            stdout.should.include('Finished');
+          });
+      });
 
-    it('should be able to use gulp-mocha', function () {
-      return exec(`${GULP} test-es7-mocha`)
-        .spread(function (stdout, stderr) {
-          print(stdout, stderr);
-          stderr.should.eql('');
-          stdout.should.include('Finished');
-        });
-    });
+      it('should be able to use gulp-mocha (ts)', function () {
+        return exec(`${GULP} test-ts-mocha`)
+          .spread(function (stdout, stderr) {
+            print(stdout, stderr);
+            stderr.should.eql('');
+            stdout.should.include('Finished');
+          });
+      });
 
-    it('should use sourcemap when throwing within gulp-mocha', function () {
-      return exec(`${GULP} --no-notif test-es7-mocha-throw`)
-        .spread(function (stdout, stderr) {
-          print(stdout, stderr);
-          let output = stdout + stderr;
-          output.should.include('This is really bad!');
-          output.should.include('.es7.js');
-        });
+      it('should use sourcemap when throwing within gulp-mocha (es7)', function () {
+        return exec(`${GULP} --no-notif test-es7-mocha-throw`)
+          .spread(function (stdout, stderr) {
+            print(stdout, stderr);
+            let output = stdout + stderr;
+            output.should.include('This is really bad!');
+            output.should.include('a-throw-specs.es7.js:8');
+          });
+      });
+
+      it('should use sourcemap when throwing within gulp-mocha (ts)', function () {
+        return exec(`${GULP} --no-notif test-ts-mocha-throw`)
+          .spread(function (stdout, stderr) {
+            print(stdout, stderr);
+            let output = stdout + stderr;
+            output.should.include('This is really bad!');
+            output.should.include('b-throw-specs.ts:7');
+          });
+      });
     });
   });
 });

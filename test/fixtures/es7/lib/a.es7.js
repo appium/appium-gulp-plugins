@@ -12,5 +12,4 @@ class A {
   }
 }
 
-export {A};
-
+export { A };

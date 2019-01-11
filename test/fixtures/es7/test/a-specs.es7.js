@@ -1,8 +1,7 @@
-/* global describe:true, it:true */
-// transpile:mocha
-
+/* eslint-disable import/no-unresolved */
 import chai from 'chai';
-import {A} from '../lib/a';
+import { A } from '../lib/a';
+
 
 chai.should();
 
@@ -12,4 +11,3 @@ describe('a', function () {
     a.getText().should.equal('hello world!');
   });
 });
-

@@ -32,16 +32,20 @@ let DEFAULT_OPTS = {
   files: ["*.js", "lib/**/*.js", "test/**/*.js", "!gulpfile.js"],
   transpile: true,
   transpileOut: "build",
+  typescript: false,
+  typescriptOpts: {},
   babelOpts: {},
   linkBabelRuntime: true,
   watch: true,
+  lintOnWatch: false,
   test: true,
-  testFiles: null,
+  testFiles: ['${testDir}/**/*-specs.js', '!${testDir}/**/*-e2e-specs.js'],
   testReporter: 'nyan',
   testTimeout: 8000,
   buildName: null,
   extraPrepublishTasks: [],
-  eslint: true
+  eslint: true,
+  tslint: false,
 };
 ```
 
@@ -50,7 +54,7 @@ running tests, and with the default task being `gulp watch`.
 
 ## transpile plugin
 
-Babel compilation, sourcemaps and file renaming functionality in
+Babel and TypeScript compilation, sourcemaps and file renaming functionality in
 one plugin. `.es7.js` and `.es6.js` files will be automatically renamed to `.js
 files`. The necessary sourcemaps, comments and imports are also
 automatically added.

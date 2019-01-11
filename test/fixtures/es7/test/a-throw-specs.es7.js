@@ -1,9 +1,6 @@
-// transpile:mocha
+/* eslint-disable import/no-unresolved */
+import { A } from '../lib/a';
 
-import chai from 'chai';
-import {A} from '../lib/a';
-
-chai.should();
 
 describe('a-throw', function () {
   it('should throw', function () {

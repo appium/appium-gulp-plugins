@@ -3,7 +3,7 @@
 const boilerplate = require('./index').boilerplate.use(require('gulp'));
 
 
-require('./test/gulpfile.js');
+require('./test/gulpfile-js');
 
 
 boilerplate({

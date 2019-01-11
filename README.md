@@ -1,7 +1,7 @@
 appium-gulp-plugins
 ===================
 
-Custom plugins used accross appium modules
+Custom plugins used across appium modules
 
 ## status
 

@@ -28,23 +28,40 @@ You can pass a lot of options to configure `boilerplate`. Here are the options
 along with their defaults (from `lib/boilerplate.js`):
 
 ```js
-let DEFAULT_OPTS = {
-  files: ["*.js", "lib/**/*.js", "test/**/*.js", "!gulpfile.js"],
+const DEFAULT_OPTS = {
+  files: ['*.js', 'lib/**/*.js', 'test/**/*.js', '!gulpfile.js'],
   transpile: true,
-  transpileOut: "build",
+  transpileOut: 'build',
   typescript: false,
   typescriptOpts: {},
   babelOpts: {},
   linkBabelRuntime: true,
   watch: true,
-  lintOnWatch: false,
-  test: true,
-  testFiles: ['${testDir}/**/*-specs.js', '!${testDir}/**/*-e2e-specs.js'],
-  testReporter: 'nyan',
-  testTimeout: 8000,
+  watchE2E: false,
+  test: {
+    files: ['${testDir}/**/*-specs.js', '!${testDir}/**/*-e2e-specs.js'],
+    traceWarnings: true,
+  },
+  coverage: {
+    files: ['./build/test/**/*-specs.js', '!./build/test/**/*-e2e-specs.js'],
+    verbose: true,
+  },
+  'coverage-e2e': {
+    files: ['./build/test/**/*-e2e-specs.js'],
+    verbose: true,
+  },
+  e2eTest: {
+    files: ['${testDir}/**/*-e2e-specs.js'],
+    forceExit: false,
+    traceWarnings: true,
+  },
+  testReporter: (process.env.TRAVIS || process.env.CI) ? 'spec' : 'nyan',
+  testTimeout: 20000,
   buildName: null,
   extraPrepublishTasks: [],
   eslint: true,
+  eslintOnWatch: false, // deprecated, move to lintOnWatch
+  lintOnWatch: false,
   tslint: false,
 };
 ```

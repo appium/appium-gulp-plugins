@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable promise/prefer-await-to-callbacks */
 /* eslint-disable promise/prefer-await-to-then */
 'use strict';
@@ -8,6 +7,7 @@ import cp from 'child_process';
 import chai from 'chai';
 import fs from 'fs';
 import _ from 'lodash';
+import log from 'fancy-log';
 
 
 chai.should();
@@ -30,10 +30,10 @@ const exec = function exec (...args) {
 const print = function print (stdout, stderr) {
   if (process.env.VERBOSE) {
     if ((stdout || '').length) {
-      console.log(`stdout --> '${stdout}'`);
+      log(`stdout --> '${stdout}'`);
     }
     if ((stderr || '').length) {
-      console.log(`stderr --> '${stderr}'`);
+      log(`stderr --> '${stderr}'`);
     }
   }
 };

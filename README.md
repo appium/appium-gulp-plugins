@@ -63,6 +63,11 @@ const DEFAULT_OPTS = {
   eslintOnWatch: false, // deprecated, move to lintOnWatch
   lintOnWatch: false,
   tslint: false,
+  ci: {
+    interval: 60000,
+    owner: 'appium',
+    repo: 'appium-build-store',
+  },
 };
 ```
 

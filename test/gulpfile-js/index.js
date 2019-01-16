@@ -1,4 +1,3 @@
-/* eslint promise/prefer-await-to-then: 0 */
 'use strict';
 
 const gulp = require('gulp');

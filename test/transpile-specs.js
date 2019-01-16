@@ -1,5 +1,4 @@
 /* eslint-disable promise/prefer-await-to-callbacks */
-/* eslint-disable promise/prefer-await-to-then */
 'use strict';
 
 import B from 'bluebird';
@@ -56,23 +55,20 @@ describe('transpile-specs', function () {
   };
 
   for (const [name, files] of _.toPairs(tests)) {
-    it(`should transpile ${name} fixtures`, function () {
-      return exec(`${GULP} transpile-${name}-fixtures`)
-        .spread(function (stdout, stderr) {
-          print(stdout, stderr);
-          stderr.should.eql('');
-          stdout.should.include('Finished');
-        }).then(function () {
-          return readFile(`build/lib/${files.classFile}.js`, 'utf8');
-        }).then(function (content) {
-          content.should.have.length.above(0);
-          content.should.include('sourceMapping');
-        });
+    it(`should transpile ${name} fixtures`, async function () {
+      const [stdout, stderr] = await exec(`${GULP} transpile-${name}-fixtures`);
+      print(stdout, stderr);
+      stderr.should.eql('');
+      stdout.should.include('Finished');
+
+      const content = await readFile(`build/lib/${files.classFile}.js`, 'utf8');
+      content.should.have.length.above(0);
+      content.should.include('sourceMapping');
     });
 
     describe('check transpiled', function () {
-      before(function () {
-        return exec(`${GULP} transpile-fixtures`);
+      before(async function () {
+        await exec(`${GULP} transpile-fixtures`);
       });
 
       it(`should be able to run transpiled ${name} code`, function () {

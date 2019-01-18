@@ -21,12 +21,16 @@ gulp.task('generate-lots-of-files', async function () {
   await exec('mkdir -p test/generated/es7');
   await exec('mkdir -p test/generated/ts');
   await B.all([
-    ..._.times(24).map(function (i) {
-      return exec(`cp test/fixtures/es7/lib/a.es7.js test/generated/es7/a${i + 1}.es7.js`);
-    }),
-    ..._.times(24).map(function (i) {
-      return exec(`cp test/fixtures/ts/lib/b.ts test/generated/ts/b${i + 1}.ts`);
-    }),
+    ...(
+      _.times(24).map(function (i) {
+        return exec(`cp test/fixtures/es7/lib/a.es7.js test/generated/es7/a${i + 1}.es7.js`);
+      })
+    ),
+    ...(
+      _.times(24).map(function (i) {
+        return exec(`cp test/fixtures/ts/lib/b.ts test/generated/ts/b${i + 1}.ts`);
+      })
+    ),
   ]);
 });
 

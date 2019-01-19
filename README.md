@@ -57,7 +57,7 @@ const DEFAULT_OPTS = {
   },
   testReporter: (process.env.TRAVIS || process.env.CI) ? 'spec' : 'nyan',
   testTimeout: 20000,
-  buildName: null,
+  build: 'Appium',
   extraPrepublishTasks: [],
   eslint: true,
   eslintOnWatch: false, // deprecated, move to lintOnWatch
@@ -117,8 +117,8 @@ Files in the `/test` directory that are named `.*-specs.js` are run. Tests which
 ### usage
 
 ```js
-let gulp = require('gulp'),
-    spawnWatcher = require('./index').spawnWatcher.use(gulp);
+const gulp = require('gulp');
+const spawnWatcher = require('./index').spawnWatcher.use(gulp, opts);
 
 spawnWatcher.configure('watch', ['lib/**/*.js','test/**/*.js','!test/fixtures'], function () {
   // this is the watch action

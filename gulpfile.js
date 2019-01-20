@@ -16,7 +16,7 @@ boilerplate({
     files: ['./build/test/**/*-specs.js', '!./build/test/fixtures', '!./build/test/**/*-e2e-specs.js', '!./build/test/generated'],
     verbose: true,
   },
-  buildName: 'Appium Gulp Plugins',
+  build: 'Appium Gulp Plugins',
   extraDefaultTasks: ['e2e-test', 'test-transpile-lots-of-files'],
   testReporter: 'dot',
   tslint: true,

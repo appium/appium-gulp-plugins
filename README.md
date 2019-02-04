@@ -165,6 +165,32 @@ Native notification is enabled by default. To disable it use the
 ### collate logging and tests
 Set the environment variable `_FORCE_LOGS`
 
+## iOS app building
+
+This package can create `gulp` tasks for building and cleaning iOS apps. By
+providing an `iosApps` property in the options sent to `boilerplate()` with the
+following:
+```js
+iOSApps: {
+  relativeLocations: {
+    iphoneos: 'relative/path/to/device/app.app',
+    iphonesimulator: 'relative/path/to/sim/app.app',
+  },
+  appName: 'AppName.app',
+},
+```
+This will create a number of `gulp` tasks, centrally one named
+`ios-apps:install`, which will go through the process of cleaning the build,
+building, and putting the products into deterministic places.
+
+The simulator app will be build in `build/Release-iphonesimulator/<appName>`,
+and the real device app will be in `build/Release-iphoneos/<appName>`.
+
+To build for real devices, set the environment variable `IOS_REAL_DEVICE` or
+`REAL_DEVICE`. To specify an `xcconfig` file, set its location in the
+`XCCONFIG_FILE` environment variable.
+
+
 ## hacking this package
 
 ### watch

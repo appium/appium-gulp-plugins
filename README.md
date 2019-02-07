@@ -163,7 +163,7 @@ This package can create `gulp` tasks for building and cleaning iOS apps. By
 providing an `iosApps` property in the options sent to `boilerplate()` with the
 following:
 ```js
-iOSApps: {
+iosApps: {
   relativeLocations: {
     iphoneos: 'relative/path/to/device/app.app',
     iphonesimulator: 'relative/path/to/sim/app.app',

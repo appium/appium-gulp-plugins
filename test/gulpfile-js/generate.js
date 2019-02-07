@@ -1,9 +1,7 @@
 'use strict';
 
 const gulp = require('gulp');
-const {
-  Transpiler, TsTranspiler, spawnWatcher, isVerbose,
-} = require('../../index');
+const { Transpiler, TsTranspiler, spawnWatcher, isVerbose } = require('../..');
 const _ = require('lodash');
 const B = require('bluebird');
 const rimraf = B.promisify(require('rimraf'));
@@ -14,7 +12,7 @@ const debug = require('gulp-debug');
 const gulpIf = require('gulp-if');
 
 
-const spawnWatch = spawnWatcher.use(gulp);
+spawnWatcher.use(gulp);
 
 gulp.task('generate-lots-of-files', async function () {
   await rimraf('test/generated/es7 test/generated/ts build/generated');
@@ -35,20 +33,20 @@ gulp.task('generate-lots-of-files', async function () {
 });
 
 gulp.task('transpile-lots-of-es7-files', function () {
-  let transpiler = new Transpiler();
+  const transpiler = new Transpiler();
   return gulp.src('test/generated/es7/**/*.js')
     .pipe(gulpIf(isVerbose(), debug()))
     .pipe(transpiler.stream())
-    .on('error', spawnWatch.handleError)
+    .on('error', spawnWatcher.handleError)
     .pipe(gulp.dest('build/generated'));
 });
 
 gulp.task('transpile-lots-of-ts-files', function () {
-  let transpiler = new TsTranspiler();
+  const transpiler = new TsTranspiler();
   return gulp.src('test/generated/ts/**/*.ts')
     .pipe(gulpIf(isVerbose(), debug()))
     .pipe(transpiler.stream())
-    .on('error', spawnWatch.handleError)
+    .on('error', spawnWatcher.handleError)
     .pipe(gulp.dest('build/generated'));
 });
 

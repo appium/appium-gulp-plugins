@@ -38,6 +38,8 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/runtime": "^7.0.0",
     "@octokit/rest": "^16.9.0",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.12.18",
     "ajv": "^6.0.0",
     "ansi-red": "^0.1.1",
     "appium-ci": "^0.3.0",
@@ -46,12 +48,10 @@
     "babel-plugin-istanbul": "^5.0.1",
     "babel-plugin-source-map-support": "^2.0.1",
     "bluebird": "^3.5.1",
-    "clear": "^0.1.0",
     "coveralls": "^3.0.0",
     "del": "^3.0.0",
     "eslint": "^5.2.0",
     "eslint-config-appium": "^4.0.1",
-    "eslint-friendly-formatter": "^4.0.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-mocha": "^5.0.0",
     "eslint-plugin-promise": "^4.0.0",
@@ -76,6 +76,8 @@
     "node-notifier": "^5.1.2",
     "nyc": "^13.0.1",
     "replace-in-file": "^3.4.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
     "rimraf": "^2.6.2",
     "semver": "^5.5.0",
     "source-map-support": "^0.5.3",
@@ -98,15 +100,13 @@
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "precommit-test": "REPORTER=dot gulp once",
     "lint": "gulp lint",
-    "lint:fix": "gulp eslint --fix"
+    "lint:fix": "gulp lint --fix"
   },
   "pre-commit": [
     "precommit-msg",
     "precommit-test"
   ],
   "devDependencies": {
-    "@types/mocha": "^5.2.5",
-    "@types/node": "^10.12.18",
     "chai": "^4.1.0",
     "pre-commit": "^1.1.3"
   }

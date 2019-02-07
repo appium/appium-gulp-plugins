@@ -149,14 +149,6 @@ gulp.task('test', ['transpile'] , function () {
 });
 ```
 
-### clear terminal
-
-Terminal is cleared by default. To avoid that call:
-
-```js
-spawnWatcher.clear(false);
-```
-
 ### notification
 
 Native notification is enabled by default. To disable it use the

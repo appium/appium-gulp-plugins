@@ -5,7 +5,6 @@ const boilerplate = require('./index').boilerplate.use(require('gulp'));
 
 require('./test/gulpfile-js');
 
-
 boilerplate({
   transpile: true,
   files: ['index.js', 'lib/**/*.js', 'test/**/*.js', '!test/fixtures/**', '!test/generated/**'],

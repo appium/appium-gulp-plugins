@@ -1,10 +1,7 @@
 'use strict';
 
 const gulp = require('gulp');
-const Transpiler = require('../../index').Transpiler;
-const TsTranspiler = require('../../index').TsTranspiler;
-const spawnWatcher = require('../../index').spawnWatcher.use(gulp);
-const isVerbose = require('../../index').isVerbose;
+const { Transpiler, TsTranspiler, isVerbose, spawnWatcher } = require('../..');
 const vinylPaths = require('vinyl-paths');
 const del = require('del');
 const debug = require('gulp-debug');

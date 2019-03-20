@@ -4,17 +4,18 @@ const gulp = require('gulp');
 const { Transpiler, TsTranspiler, spawnWatcher, isVerbose } = require('../..');
 const _ = require('lodash');
 const B = require('bluebird');
-const { fs } = require('appium-support');
-const { exec } = require('teen_process');
+const { exec } = require('../../lib/utils');
 const assert = require('assert');
 const debug = require('gulp-debug');
 const gulpIf = require('gulp-if');
+const globby = require('globby');
+const rimraf = B.promisify(require('rimraf'));
 
 
 spawnWatcher.use(gulp);
 
 gulp.task('generate-lots-of-files', async function () {
-  await fs.rimraf('test/generated/es7 test/generated/ts build/generated');
+  await rimraf('test/generated/es7 test/generated/ts build/generated');
   await exec('mkdir', ['-p', 'test/generated/es7']);
   await exec('mkdir', ['-p', 'test/generated/ts']);
   await B.all([
@@ -54,26 +55,26 @@ gulp.task('transpile-lots-of-files',
 );
 
 gulp.task('test-transpile-lots-of-es7-files', async function testTranspileLotsOfFiles () {
-  let files = await fs.glob('test/generated/es7/**/*.js');
+  let files = await globby('test/generated/es7/**/*.js');
   const numOfFiles = files.length;
   assert(numOfFiles > 16);
 
-  files = await fs.glob('build/generated/a*.js');
+  files = await globby('build/generated/a*.js');
   assert(files.length === numOfFiles);
 
-  files = await fs.glob('build/generated/*.es7.js');
+  files = await globby('build/generated/*.es7.js');
   assert(files.length === 0);
 });
 
 gulp.task('test-transpile-lots-of-ts-files', async function testTranspileLotsOfFiles () {
-  let files = await fs.glob('test/generated/ts/**/*.ts');
+  let files = await globby('test/generated/ts/**/*.ts');
   const numOfFiles = files.length;
   assert(numOfFiles > 16);
 
-  files = await fs.glob('build/generated/b*.js');
+  files = await globby('build/generated/b*.js');
   assert(files.length === numOfFiles);
 
-  files = await fs.glob('build/generated/*.ts');
+  files = await globby('build/generated/*.ts');
   assert(files.length === 0);
 });
 

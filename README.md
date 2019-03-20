@@ -185,6 +185,11 @@ To build for real devices, set the environment variable `IOS_REAL_DEVICE` or
 
 ## hacking this package
 
+###
+
+Since this package is used to build and test all the Appium packages, it should
+not _use_ any of those packages.
+
 ### watch
 
 ```

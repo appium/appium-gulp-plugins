@@ -76,7 +76,7 @@
     "node-notifier": "^5.1.2",
     "nyc": "^14.0.0",
     "plugin-error": "^1.0.1",
-    "replace-in-file": "^3.4.0",
+    "replace-in-file": "^4.0.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
     "rimraf": "^2.6.3",

@@ -12,7 +12,8 @@
   "plugins": [
     "source-map-support",
     "@babel/plugin-proposal-class-properties",
-    "@babel/plugin-transform-runtime"
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-syntax-bigint"
   ],
   "comments": false,
   "env": {

@@ -80,7 +80,7 @@
     "replace-in-file": "^4.0.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
-    "rimraf": "^2.6.3",
+    "rimraf": "^3.0.0",
     "semver": "^6.0.0",
     "shell-quote": "^1.6.1",
     "source-map-support": "^0.5.3",

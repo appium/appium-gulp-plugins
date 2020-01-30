@@ -41,7 +41,7 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/runtime": "^7.0.0",
     "@octokit/rest": "16.22.0 || >= 16.23.1 <17.0.0",
-    "@types/mocha": "^5.2.5",
+    "@types/mocha": "^7.0.0",
     "@types/node": "^13.1.0",
     "ajv": "^6.0.0",
     "ansi-red": "^0.1.1",

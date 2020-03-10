@@ -42,7 +42,7 @@
     "@babel/plugin-transform-runtime": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/runtime": "^7.0.0",
-    "@octokit/rest": "17.0.0",
+    "@octokit/rest": "17.0.1",
     "@types/mocha": "^7.0.0",
     "@types/node": "^13.1.0",
     "ajv": "^6.0.0",

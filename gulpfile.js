@@ -17,6 +17,5 @@ boilerplate({
   },
   build: 'Appium Gulp Plugins',
   extraDefaultTasks: ['e2e-test', 'test-transpile-lots-of-files'],
-  testReporter: 'dot',
-  tslint: true,
+  testReporter: 'dot'
 });

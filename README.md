@@ -31,8 +31,6 @@ const DEFAULT_OPTS = {
   files: ['*.js', 'lib/**/*.js', 'test/**/*.js', '!gulpfile.js'],
   transpile: true,
   transpileOut: 'build',
-  typescript: false,
-  typescriptOpts: {},
   babelOpts: {},
   linkBabelRuntime: true,
   watch: true,
@@ -61,7 +59,6 @@ const DEFAULT_OPTS = {
   eslint: true,
   eslintOnWatch: false, // deprecated, move to lintOnWatch
   lintOnWatch: false,
-  tslint: false,
   ci: {
     interval: 60000,
     owner: 'appium',
@@ -75,7 +72,7 @@ running tests, and with the default task being `gulp watch`.
 
 ## transpile plugin
 
-Babel and TypeScript compilation, sourcemaps and file renaming functionality in
+Babel compilation, sourcemaps and file renaming functionality in
 one plugin. `.es7.js` and `.es6.js` files will be automatically renamed to `.js
 files`. The necessary sourcemaps, comments and imports are also
 automatically added.

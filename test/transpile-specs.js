@@ -46,12 +46,7 @@ describe('transpile-specs', function () {
       classFile: 'a',
       throwFile: 'a-throw.es7.js:7',
       throwTestFile: 'a-throw-specs.es7.js:8',
-    },
-    ts: {
-      classFile: 'b',
-      throwFile: 'b-throw.ts:6',
-      throwTestFile: 'b-throw-specs.ts:7',
-    },
+    }
   };
 
   for (const [name, files] of _.toPairs(tests)) {

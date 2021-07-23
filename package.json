@@ -43,7 +43,7 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/runtime": "^7.0.0",
     "@octokit/rest": "^18.0.0",
-    "@types/mocha": "^8.0.3",
+    "@types/mocha": "^9.0.0",
     "@types/node": "^15.0.1",
     "ansi-red": "^0.x",
     "axios": "^0.x",
